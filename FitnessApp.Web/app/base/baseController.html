@@ -1,0 +1,21 @@
+﻿<div ng-controller="BaseController as base">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Fitness App</a>
+        </div>
+        <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Food Tracker</a></li>
+                <li><a href="#">Water Tracker</a></li>
+                <li><a href="#">Exercise Tracker</a></li>
+                <li><a href="#">Sleep Tracker</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>

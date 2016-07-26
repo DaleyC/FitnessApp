@@ -1,0 +1,11 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+span {
+    font-style: italic;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
