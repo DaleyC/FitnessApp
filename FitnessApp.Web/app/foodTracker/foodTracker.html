@@ -1,0 +1,16 @@
+﻿<form class="form-inline" role="form" ng-controller="FoodTrackerController as foodTracker">
+    <div class="container">
+        <div class="row form-header">
+            <h1>Food Tracker</h1>
+            <hr />
+        </div>
+        <div class="row">
+            <input type="text" class="form-control col-md-2" placeholder="Calories"/>
+            <button class="btn btn-primary col-md-1" type="submit">Add calories</button>
+            <p class="lead col-md-5 col-md-offset-2  remove-padding-left"><label>Total daily calories:</label> {{foodTracker.calories}}</p>
+        </div>
+        <div class="row padding-left">
+            <button class="btn btn-default col-md-1 col-md-offset-5" type="submit">Clear</button>
+        </div>
+    </div>
+</form>

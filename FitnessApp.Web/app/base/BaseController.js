@@ -5,5 +5,6 @@
 
     function BaseController() {
         var vm = this;
+        vm.isCollapsedHorizontal = false;
     }
 })();
