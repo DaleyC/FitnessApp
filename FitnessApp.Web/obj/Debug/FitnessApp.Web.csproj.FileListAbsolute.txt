@@ -4,3 +4,9 @@ C:\Users\Mike\documents\visual studio 2015\Projects\FitnessApp\FitnessApp.Web\bi
 C:\Users\Mike\documents\visual studio 2015\Projects\FitnessApp\FitnessApp.Web\obj\Debug\FitnessApp.Web.csprojResolveAssemblyReference.cache
 C:\Users\Mike\documents\visual studio 2015\Projects\FitnessApp\FitnessApp.Web\obj\Debug\FitnessApp.Web.dll
 C:\Users\Mike\documents\visual studio 2015\Projects\FitnessApp\FitnessApp.Web\obj\Debug\FitnessApp.Web.pdb
+C:\Users\Mike\Documents\Visual Studio 2015\Projects\DaleysFitnessApp\FitnessApp\FitnessApp.Web\bin\FitnessApp.Web.dll.config
+C:\Users\Mike\Documents\Visual Studio 2015\Projects\DaleysFitnessApp\FitnessApp\FitnessApp.Web\bin\FitnessApp.Web.dll
+C:\Users\Mike\Documents\Visual Studio 2015\Projects\DaleysFitnessApp\FitnessApp\FitnessApp.Web\bin\FitnessApp.Web.pdb
+C:\Users\Mike\Documents\Visual Studio 2015\Projects\DaleysFitnessApp\FitnessApp\FitnessApp.Web\obj\Debug\FitnessApp.Web.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\Visual Studio 2015\Projects\DaleysFitnessApp\FitnessApp\FitnessApp.Web\obj\Debug\FitnessApp.Web.dll
+C:\Users\Mike\Documents\Visual Studio 2015\Projects\DaleysFitnessApp\FitnessApp\FitnessApp.Web\obj\Debug\FitnessApp.Web.pdb
