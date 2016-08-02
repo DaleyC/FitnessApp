@@ -3,7 +3,6 @@
 }
 /*HEADER*/
 .app-header {
-    z-index: 1;
     position: fixed;
     left: 0;
     right: 0;
@@ -11,13 +10,15 @@
     height: 75px;
     background-color: #303F9F;
     z-index: 2;
-    box-shadow: 0px 0px 20px #000000;
+    box-shadow: 3px 3px 9px #0c0c0c;
 }
 
     .app-header h2 {
-        display: inline-block;
         color: white;
-        margin-left: 86.5%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin-right: 20px;
     }
 
 
@@ -42,14 +43,13 @@
     left: 0;
     padding-top: 90px;
     background-color: #3F51B5;
-    box-shadow: 0px 0px 15px black;
+    box-shadow: 2px 2px 7px #0c0c0c;
 }
 
     .side-nav a {
         display: block;
         text-align: left;
         color: #A7FFEB;
-        text-decoration-style: none;
         text-decoration-color: #FFFFFF;
         font-size: medium;
         width: 250px;
@@ -66,16 +66,17 @@
 .form-inline {
     background-color: white;
     width: 65%;
+    margin-top: 100px;
+    margin-bottom: 40px;
     margin-left: 17.5%;
     min-height: 1000px;
-    z-index: -1;
-    box-shadow: 0px 0px 10px grey;
+    box-shadow: 1px 1px 5px #BDBDBD;
 }
 
 .form-header {
-    margin-top: 8%;
+    margin-top: 1%;
 }
 
-.remove-padding-left {
-    padding-left: 0;
+.margin-top-20 {
+    margin-top: 20px;
 }

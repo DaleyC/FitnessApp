@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAnimate']);
+    angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'offClick']);
 
     angular.module('app').config(config);
     function config($stateProvider, $urlRouterProvider) {

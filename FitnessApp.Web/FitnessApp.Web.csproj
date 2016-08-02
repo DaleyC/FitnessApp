@@ -28,6 +28,7 @@
     <Content Include="app\base\BaseController.js" />
     <Content Include="app\foodTracker\foodTracker.html" />
     <Content Include="app\foodTracker\FoodTrackerController.js" />
+    <Content Include="app\scripts\angular-off-click.min.js" />
     <Content Include="app\scripts\ui-bootstrap-tpls-2.0.0.min.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />

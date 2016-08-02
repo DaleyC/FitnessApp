@@ -1,11 +1,11 @@
 ﻿<div ng-controller="BaseController as base">
     <div class="app-header add-shadow">
-        <button type="button" class="btn btn-default menu-button" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">
+        <button type="button" off-click-filter="'.side-nav'" class="btn btn-default menu-button" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">
             <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
         </button>
-        <!--<h2>Fitness App</h2>-->
+        <h2>Fitness App</h2>
     </div>
-    <div class="side-nav" uib-collapse="!isCollapsedHorizontal" horizontal>
+    <div class="side-nav" horizontal uib-collapse="!isCollapsedHorizontal" off-click="isCollapsedHorizontal = false" ng-click="isCollapsedHorizontal = false">
         <a href="#"><i class="fa fa-home fa-lg menu-icon" aria-hidden="true"></i>Home</a>
         <a ui-sref="base.foodTracker"><i class="fa fa-cutlery fa-lg menu-icon" aria-hidden="true"></i>Food Tracker</a>
         <a href="#"><i class="fa fa-heart fa-lg menu-icon" aria-hidden="true"></i>Exercise Tracker</a>
