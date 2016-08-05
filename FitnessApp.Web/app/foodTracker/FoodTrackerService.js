@@ -1,0 +1,27 @@
+﻿(function () {
+    'use strict';
+
+    angular.module('app').factory('FoodTrackerService', Service);
+
+    function Service($q, $timeout, $http) {
+        var service = {
+            getFoodForDay: getFoodForDay
+        };
+
+        return service;
+
+        function getFoodForDay(date) {
+            var model = {
+                date: new Date(),
+                totalCalories: 100,
+                carbs: 200
+            }
+            // Simple GET request example:
+            return $http({
+                method: 'POST',
+                url: 'http://jsonplaceholder.typicode.com/posts',
+                data: model
+            })
+        }
+    }
+})();

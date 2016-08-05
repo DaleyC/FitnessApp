@@ -1,5 +1,5 @@
 ﻿<div ng-controller="BaseController as base">
-    <div class="app-header add-shadow">
+    <div class="app-header">
         <button type="button" off-click-filter="'.side-nav'" class="btn btn-default menu-button" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">
             <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
         </button>
@@ -11,5 +11,5 @@
         <a href="#"><i class="fa fa-heart fa-lg menu-icon" aria-hidden="true"></i>Exercise Tracker</a>
         <a href="#"><i class="fa fa-bed fa-lg menu-icon" aria-hidden="true"></i>Sleep</a>
     </div>
-    <div ui-view></div>
+    <div ui-view class="ft-view"></div>
 </div> 

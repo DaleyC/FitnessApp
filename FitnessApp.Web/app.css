@@ -41,42 +41,56 @@
     top: 0;
     bottom: 0;
     left: 0;
+    height: 100%;
     padding-top: 90px;
     background-color: #3F51B5;
     box-shadow: 2px 2px 7px #0c0c0c;
 }
 
     .side-nav a {
+        width: 250px;
         display: block;
         text-align: left;
         color: #A7FFEB;
-        text-decoration-color: #FFFFFF;
         font-size: medium;
-        width: 250px;
         padding-top: 15px;
         padding-bottom: 15px;
         padding-left: 10px;
     }
 
+        .side-nav a:hover {
+            background-color: #7986CB;
+        }
+
 .menu-icon {
     margin-left: 5%;
     margin-right: 5%;
 }
-/*FORM*/
-.form-inline {
+/*FOOD TRACKER FORM*/
+.ft-form {
+    padding: 15px;
     background-color: white;
-    width: 65%;
-    margin-top: 100px;
-    margin-bottom: 40px;
-    margin-left: 17.5%;
-    min-height: 1000px;
     box-shadow: 1px 1px 5px #BDBDBD;
+    position: relative;
+    top: 100px;
 }
 
-.form-header {
-    margin-top: 1%;
+.button-max-width {
+    width: 100%;
 }
 
-.margin-top-20 {
-    margin-top: 20px;
+.da-date-picker {
+    z-index: 0;
 }
+
+.btn-primary {
+    background-color: #A7FFEB;
+    border-color: #303F9F;
+    color: #303F9F;
+}
+
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:active:focus {
+        background-color: #26A69A;
+        border-color: #303F9F;
+        color: #303F9F;
+    }
