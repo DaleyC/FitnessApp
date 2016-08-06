@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').factory('FoodTrackerService', Service);
+    angular.module('app').factory('foodTrackerService', Service);
 
     function Service($q, $timeout, $http) {
         var service = {

@@ -2,6 +2,16 @@
     <form class="form-horizontal">
         <fieldset>
             <legend>Food Tracker</legend>
+            <label class="control-label col-sm-2">Date</label>
+            <div class="col-sm-4">
+                <ft-date-picker selected-date="foodTracker.selectedDate"></ft-date-picker>
+            </div>
+            <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
+                <button class="btn btn-primary button-max-width" type="submit">Save</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Progress</legend>
             <div class="form-group">
                 <label class="control-label col-sm-2">Remaining calories</label>
                 <div class="col-sm-4">
@@ -24,12 +34,19 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend>Add Food</legend>
+            <legend>Add Water</legend>
             <div class="form-group">
-                <label class="control-label col-sm-2">Date</label>
-                <div class="col-sm-3">
-                    <da-date-picker></da-date-picker>
+                <label class="control-label col-sm-2">Water (cups)</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" placeholder="Cups of water" />
                 </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Add Food</legend>
+            <div class="row">
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-2">Meal</label>
                 <div class="col-sm-4">
                     <select class="form-control">
@@ -40,21 +57,15 @@
                         <option>Dinner</option>
                     </select>
                 </div>
-            </div>
-            <div class="form-group">
                 <label class="control-label col-sm-2">Food item</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" placeholder="Name of food item" />
                 </div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-2">Calories</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" placeholder="Calories" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Fat (g)</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Fat" />
                 </div>
                 <label class="control-label col-sm-2">Carbs (g)</label>
                 <div class="col-sm-4">
@@ -62,21 +73,18 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-2">Fat (g)</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" placeholder="Fat" />
+                </div>
                 <label class="control-label col-sm-2">Protein (g)</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" placeholder="Protein" />
                 </div>
             </div>
-        </fieldset>
-        <fieldset>
-            <legend>Add Water</legend>
             <div class="form-group">
-                <label class="control-label col-sm-2">Water (cups)</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Cups of water" />
-                </div>
-                <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
-                    <button class="btn btn-primary button-max-width" type="submit">Save</button>
+                <div class="col-md-2 col-md-offset-8 col-sm-3 col-sm-offset-8">
+                    <button class="btn btn-primary" type="submit">Add</button>
                 </div>
             </div>
         </fieldset>
@@ -87,27 +95,27 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th colspan="12">{{foodTracker.selectedDate}}</th>
+                                <th colspan="12"></th>
                             </tr>
                         </thead>
                         <thead>
                             <tr>
-                                <th>Meal</th>
-                                <th>Food item</th>
-                                <th>Calories</th>
-                                <th>Fat (g)</th>
-                                <th>Carbs (g)</th>
-                                <th>Protein (g)</th>
+                                <th class="col-md-2">Meal</th>
+                                <th class="col-md-2">Food item</th>
+                                <th class="col-md-2">Calories</th>
+                                <th class="col-md-2">Fat (g)</th>
+                                <th class="col-md-2">Carbs (g)</th>
+                                <th class="col-md-2">Protein (g)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="col-md-2">some text</td>
-                                <td class="col-md-2"></td>
-                                <td class="col-md-2"></td>
-                                <td class="col-md-2"></td>
-                                <td class="col-md-2"></td>
-                                <td class="col-md-2"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
