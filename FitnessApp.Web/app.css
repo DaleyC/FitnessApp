@@ -1,7 +1,7 @@
 ﻿body {
     background-color: #f2f2f2;
 }
-/*HEADER*/
+
 .app-header {
     position: fixed;
     left: 0;
@@ -33,8 +33,8 @@
         border-color: #1DE9B6;
         color: #1DE9B6;
     }
-/*SIDE-NAV MENU*/
-.side-nav {
+
+.menu-side-nav {
     z-index: 1;
     position: fixed;
     top: 0;
@@ -46,7 +46,7 @@
     box-shadow: 2px 2px 7px #0c0c0c;
 }
 
-    .side-nav a {
+    .menu-side-nav a {
         width: 250px;
         display: block;
         text-align: left;
@@ -57,7 +57,7 @@
         padding-left: 10px;
     }
 
-        .side-nav a:hover {
+        .menu-side-nav a:hover {
             background-color: #7986CB;
         }
 
@@ -65,16 +65,13 @@
     margin-left: 5%;
     margin-right: 5%;
 }
-/*FOOD TRACKER FORM*/
+
 .ft-form {
     padding: 15px;
     background-color: white;
     box-shadow: 1px 1px 5px #BDBDBD;
     position: relative;
     top: 100px;
-}
-
-.ft-date-picker {
     z-index: 0;
 }
 
@@ -89,10 +86,11 @@
         border-color: #A7FFEB;
         color: #303F9F;
     }
-/*GENERAL*/
+
 .button-max-width {
     width: 100%;
 }
-.z-index-0{
-    z-index: 0;
+
+.z-index-0 {
+    z-index: 1;
 }

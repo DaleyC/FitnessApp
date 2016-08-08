@@ -4,6 +4,8 @@
     angular.module('app').factory('foodTrackerService', Service);
 
     function Service($q, $timeout, $http) {
+
+
         var service = {
             getFoodForDay: getFoodForDay
         };
