@@ -1,5 +1,5 @@
 ﻿<div class="container ft-form" ng-controller="FoodTrackerController as foodTracker">
-    <form class="form-horizontal">
+    <form novalidate class="form-horizontal" name="foodTracker.foodTrackerForm" ng-class="{'ftNotValid': foodTracker.submitted}">
         <fieldset>
             <legend>Food Tracker</legend>
             <label class="control-label col-sm-2">Date</label>
@@ -38,7 +38,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Water (cups)</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Cups of water" ng-model="foodTracker.model.water" />
+                    <input type="number" class="form-control" placeholder="Cups of water" ng-model="foodTracker.model.water" min="0" />
                 </div>
             </div>
         </fieldset>
@@ -47,9 +47,9 @@
             <div class="row">
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2">Meal</label>
+                <label class="control-label col-sm-2"><span class="item-req">*</span> Meal</label>
                 <div class="col-sm-4">
-                    <select class="form-control" ng-model="foodTracker.meal.mealName">
+                    <select class="form-control" ng-model="foodTracker.meal.mealName" required>
                         <option selected disabled value="">Select a meal type</option>
                         <option>Breakfast</option>
                         <option>Lunch</option>
@@ -57,34 +57,34 @@
                         <option>Dinner</option>
                     </select>
                 </div>
-                <label class="control-label col-sm-2">Food item</label>
+                <label class="control-label col-sm-2"><span class="item-req">*</span> Food item</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="Name of food item" ng-model="foodTracker.meal.foodItem" />
+                    <input type="text" class="form-control" placeholder="Name of food item" ng-model="foodTracker.meal.foodItem" required />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2">Calories</label>
+                <label class="control-label col-sm-2"><span class="item-req">*</span> Calories</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Calories" ng-model="foodTracker.meal.calories" />
+                    <input type="number" class="form-control" placeholder="Calories" ng-model="foodTracker.meal.calories" min="0" required />
                 </div>
                 <label class="control-label col-sm-2">Carbs (g)</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Carbs" ng-model="foodTracker.meal.carbs" />
+                    <input type="number" class="form-control" placeholder="Carbs" ng-model="foodTracker.meal.carbs" min="0" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Fat (g)</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Fat" ng-model="foodTracker.meal.fat" />
+                    <input type="number" class="form-control" placeholder="Fat" ng-model="foodTracker.meal.fat" min="0" />
                 </div>
                 <label class="control-label col-sm-2">Protein (g)</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Protein" ng-model="foodTracker.meal.protein" />
+                    <input type="number" class="form-control" placeholder="Protein" ng-model="foodTracker.meal.protein" min="0" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-2 col-md-offset-8 col-sm-3 col-sm-offset-8">
-                    <button class="btn btn-primary" type="submit" ng-click="foodTracker.addMeal()">Add</button>
+                    <button class="btn btn-primary" type="submit" name="addMeal" ng-click="foodTracker.addMeal()">Add</button>
                 </div>
             </div>
         </fieldset>

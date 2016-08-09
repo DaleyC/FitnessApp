@@ -21,11 +21,16 @@
             setUpWatches();
         }
 
-        function addMeal() {
+        function addMeal(foodTrackerForm) {
+            if (vm.foodTrackerForm.$invalid) {
+                vm.submitted = true;
+                return;
+            }
             var savedMeal = angular.copy(vm.meal);
             vm.model.meals.push(savedMeal);
             totalCalories();
             vm.meal = {};
+            vm.submitted = false;
         }
         function setUpWatches() {
             $scope.$watch(
@@ -46,6 +51,7 @@
 
             vm.remainingCalories = vm.remainingCalories - vm.totalCal;
         }
+
         function getFoodForDay() {
             vm.getPromise = foodTrackerService.getFoodForDay(vm.date)
                 .then(function (data) {

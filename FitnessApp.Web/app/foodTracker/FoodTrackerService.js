@@ -5,7 +5,6 @@
 
     function Service($q, $timeout, $http) {
 
-
         var service = {
             getFoodForDay: getFoodForDay
         };
@@ -18,7 +17,7 @@
                 totalCalories: 100,
                 carbs: 200
             }
-            // Simple GET request example:
+            
             return $http({
                 method: 'POST',
                 url: 'http://jsonplaceholder.typicode.com/posts',

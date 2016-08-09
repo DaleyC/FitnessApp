@@ -75,6 +75,10 @@
     z-index: 0;
 }
 
+.ftNotValid .ng-invalid {
+    border: 2px solid red;
+}
+
 .btn-primary {
     background-color: #1DE9B6;
     border-color: #1DE9B6;
@@ -93,4 +97,9 @@
 
 .z-index-0 {
     z-index: 1;
+}
+
+.item-req {
+    font-size: large;
+    color: red;
 }
