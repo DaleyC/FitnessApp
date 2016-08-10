@@ -44,6 +44,13 @@
                 }
                 );
         }
+        function totalCalories() {
+            vm.totalCal = vm.model.meals.reduce(function (total, num) {
+                return total += num.calories;
+            }, 0);
+
+            vm.remainingCalories = 2000 - vm.totalCal;
+        }
 
         function getFoodForDay() {
             vm.getPromise = foodTrackerService.getFoodForDay(vm.date)
