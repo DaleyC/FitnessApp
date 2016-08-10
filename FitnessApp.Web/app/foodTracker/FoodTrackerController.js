@@ -10,10 +10,10 @@
         vm.model = {};
         vm.model.meals = [];
         vm.model.water = 0;
-        vm.totalCal = 0;
-        vm.totalWater = 0;
         vm.remainingCalories = 2000;
         vm.remainingWater = 64;
+        vm.totalCal = 0;
+        vm.totalWater = 0;
 
         init();
 
@@ -43,13 +43,6 @@
 
                 }
                 );
-        }
-        function totalCalories() {
-            vm.totalCal = vm.model.meals.reduce(function (total, num) {
-                return total += num.calories;
-            }, 0);
-
-            vm.remainingCalories = vm.remainingCalories - vm.totalCal;
         }
 
         function getFoodForDay() {

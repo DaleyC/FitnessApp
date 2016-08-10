@@ -33,6 +33,8 @@
     <Content Include="app\foodTracker\foodTrackerService.js" />
     <Content Include="app\scripts\angular-off-click.min.js" />
     <Content Include="app\scripts\ui-bootstrap-tpls-2.0.0.min.js" />
+    <Content Include="app\sleepTracker\sleepTracker.html" />
+    <Content Include="app\sleepTracker\SleepTrackerController.js" />
     <Content Include="index.html" />
     <Content Include="web.config" />
   </ItemGroup>
