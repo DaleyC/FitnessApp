@@ -1,10 +1,10 @@
 ﻿<div class="container fa-form" ng-controller="FoodTrackerController as foodTracker">
-    <form novalidate class="form-horizontal" name="foodTracker.foodTrackerForm" ng-class="{'ftNotValid': foodTracker.submitted}">
+    <form novalidate class="form-horizontal" name="foodTracker.foodTrackerForm" ng-class="{'faNotValid': foodTracker.submitted}">
         <fieldset>
             <legend>Food Tracker</legend>
             <label class="control-label col-sm-2">Date</label>
             <div class="col-sm-4">
-                <ft-date-picker selected-date="foodTracker.model.selectedDate" editing="foodTracker.editing"></ft-date-picker>
+                <fa-date-picker selected-date="foodTracker.model.selectedDate" editing="foodTracker.editing"></fa-date-picker>
             </div>
             <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
                 <button class="btn btn-primary button-max-width" type="submit">Save</button>

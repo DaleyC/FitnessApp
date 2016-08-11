@@ -15,9 +15,13 @@
                 url: "food-tracker",
                 templateUrl: "app/foodTracker/foodTracker.html"
             })
-        .state('base.sleepTracker', {
-            url: "sleep-tracker",
-            templateUrl: "app/sleepTracker/sleepTracker.html"
-        })
+            .state('base.sleepTracker', {
+                url: "sleep-tracker",
+                templateUrl: "app/sleepTracker/sleepTracker.html"
+            })
+            .state('base.exerciseTracker', {
+                url: "exercise-tracker",
+                templateUrl: "app/exerciseTracker/exerciseTracker.html"
+            })
     }
 })();

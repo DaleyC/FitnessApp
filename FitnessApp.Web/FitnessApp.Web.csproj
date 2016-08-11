@@ -26,8 +26,10 @@
     <Content Include="app\app.js" />
     <Content Include="app\base\base.html" />
     <Content Include="app\base\BaseController.js" />
-    <Content Include="app\components\ftDatePicker.html" />
-    <Content Include="app\components\ftDatePicker.js" />
+    <Content Include="app\components\faDatePicker.html" />
+    <Content Include="app\components\faDatePicker.js" />
+    <Content Include="app\exerciseTracker\exerciseTracker.html" />
+    <Content Include="app\exerciseTracker\ExerciseTrackerController.js" />
     <Content Include="app\foodTracker\foodTracker.html" />
     <Content Include="app\foodTracker\FoodTrackerController.js" />
     <Content Include="app\foodTracker\foodTrackerService.js" />

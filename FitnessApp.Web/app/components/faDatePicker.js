@@ -1,16 +1,16 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').component('ftDatePicker', {
-        templateUrl: 'app/components/ftDatePicker.html',
-        controller: ftDatePickerController,
+    angular.module('app').component('faDatePicker', {
+        templateUrl: 'app/components/faDatePicker.html',
+        controller: faDatePickerController,
         bindings: {
             selectedDate: '=',
             editing: '='
         }
     })
 
-    function ftDatePickerController() {
+    function faDatePickerController() {
         var vm = this;
         vm.editing = false;
 
