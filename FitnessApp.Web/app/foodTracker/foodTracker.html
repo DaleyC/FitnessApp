@@ -4,7 +4,7 @@
             <legend>Food Tracker</legend>
             <label class="control-label col-sm-2">Date</label>
             <div class="col-sm-4">
-                <ft-date-picker selected-date="foodTracker.model.selectedDate"></ft-date-picker>
+                <ft-date-picker selected-date="foodTracker.model.selectedDate" editing="foodTracker.editing"></ft-date-picker>
             </div>
             <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
                 <button class="btn btn-primary button-max-width" type="submit">Save</button>
@@ -84,7 +84,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-2 col-md-offset-8 col-sm-3 col-sm-offset-8">
-                    <button class="btn btn-primary" type="submit" name="addMeal" ng-click="foodTracker.addMeal()">Add</button>
+                    <button class="btn btn-primary" type="submit" name="addMeal" ng-click="foodTracker.addMeal()">Save</button>
                 </div>
             </div>
         </fieldset>
@@ -101,11 +101,13 @@
                         <thead>
                             <tr>
                                 <th class="col-md-2">Meal</th>
-                                <th class="col-md-2">Food item</th>
+                                <th class="col-md-3">Food item</th>
                                 <th class="col-md-2">Calories</th>
-                                <th class="col-md-2">Fat (g)</th>
-                                <th class="col-md-2">Carbs (g)</th>
-                                <th class="col-md-2">Protein (g)</th>
+                                <th class="col-md-1">Fat (g)</th>
+                                <th class="col-md-1">Carbs (g)</th>
+                                <th class="col-md-1">Protein (g)</th>
+                                <th class="col-md-1">Edit</th>
+                                <th class="col-md-1">Remove</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,6 +118,12 @@
                                 <td>{{meal.fat}}</td>
                                 <td>{{meal.carbs}}</td>
                                 <td>{{meal.protein}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs col-sm-4" type="submit" ng-click="foodTracker.editItem($index)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-default btn-xs col-sm-4" type="submit" ng-click="foodTracker.removeItem($index)" ng-disabled="foodTracker.editing"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

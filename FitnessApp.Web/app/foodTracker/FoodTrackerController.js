@@ -6,12 +6,14 @@
     function FoodTrackerController(foodTrackerService, $scope) {
         var vm = this;
         vm.addMeal = addMeal;
+        vm.editItem = editItem;
         vm.meal = {};
         vm.model = {};
         vm.model.meals = [];
         vm.model.water = 0;
         vm.remainingCalories = 2000;
         vm.remainingWater = 64;
+        vm.removeItem = removeItem;
         vm.totalCal = 0;
         vm.totalWater = 0;
 
@@ -26,11 +28,21 @@
                 vm.submitted = true;
                 return;
             }
-            var savedMeal = angular.copy(vm.meal);
-            vm.model.meals.push(savedMeal);
+            else if (vm.editing) {
+                vm.model.meals[vm.index] = angular.copy(vm.meal);
+            }
+            else {
+                vm.model.meals.push(angular.copy(vm.meal));
+            }
             totalCalories();
             vm.meal = {};
+            vm.editing = false;
             vm.submitted = false;
+        }
+        function editItem(index) {
+            vm.meal = angular.copy(vm.model.meals[index]);
+            vm.index = index;
+            vm.editing = true;
         }
         function setUpWatches() {
             $scope.$watch(
@@ -44,11 +56,13 @@
                 }
                 );
         }
+        function removeItem(index) {
+            vm.model.meals.splice(index, 1);
+        }
         function totalCalories() {
             vm.totalCal = vm.model.meals.reduce(function (total, num) {
                 return total += num.calories;
             }, 0);
-
             vm.remainingCalories = 2000 - vm.totalCal;
         }
 
@@ -60,4 +74,5 @@
                 });
         }
     }
+
 })();

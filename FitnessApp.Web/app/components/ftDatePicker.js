@@ -5,12 +5,14 @@
         templateUrl: 'app/components/ftDatePicker.html',
         controller: ftDatePickerController,
         bindings: {
-            selectedDate: '='
+            selectedDate: '=',
+            editing: '='
         }
     })
 
     function ftDatePickerController() {
         var vm = this;
+        vm.editing = false;
 
         vm.datePickerPopup = {
             opened: false
