@@ -85,7 +85,7 @@
     color: black;
 }
 
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:active:focus {
+    .btn-primary:hover, .btn-primary.active, .btn-primary.active:hover, .btn-primary:active:hover {
         background-color: #A7FFEB;
         border-color: #A7FFEB;
         color: #303F9F;
@@ -98,6 +98,10 @@
 .item-req {
     font-size: large;
     color: red;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
 }
 
 .text-red {

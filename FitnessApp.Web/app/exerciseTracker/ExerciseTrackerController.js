@@ -5,5 +5,10 @@
 
     function ExerciseTrackerController() {
         var vm = this;
+
+        vm.exercise = {};
+        vm.model = {};
+        vm.model.exerciseArr = [];
+
     }
 })();
