@@ -85,7 +85,7 @@
     color: black;
 }
 
-    .btn-primary:hover, .btn-primary.active, .btn-primary.active:hover, .btn-primary:active:hover {
+    .btn-primary:hover, .btn-primary.active, .btn-primary.active:hover, .btn-primary:active:hover, .btn-primary:focus {
         background-color: #A7FFEB;
         border-color: #A7FFEB;
         color: #303F9F;
