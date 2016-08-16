@@ -3,12 +3,9 @@
 
     angular.module('app').controller('ExerciseTrackerController', ExerciseTrackerController);
 
-    function ExerciseTrackerController() {
+    function ExerciseTrackerController($state) {
         var vm = this;
 
-        vm.exercise = {};
-        vm.model = {};
-        vm.model.exerciseArr = [];
-
+       
     }
 })();

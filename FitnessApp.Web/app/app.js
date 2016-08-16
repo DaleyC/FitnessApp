@@ -23,5 +23,13 @@
                 url: "exercise-tracker",
                 templateUrl: "app/exerciseTracker/exerciseTracker.html"
             })
+            .state('base.exerciseTracker.dailyTracker', {
+                url: "/daily-tracker",
+                templateUrl: "app/exerciseTracker/dailyTracker.html"
+            })
+            .state('base.exerciseTracker.history', {
+                url: "/exercise-history",
+                templateUrl: "app/exerciseTracker/history.html"
+            })
     }
 })();

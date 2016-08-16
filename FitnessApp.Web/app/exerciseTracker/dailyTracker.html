@@ -1,0 +1,111 @@
+﻿<form novalidate class="form-horizontal margin-top-15" name="dailyTracker.dailyTrackerForm" ng-controller="DailyTrackerController as dailyTracker" ng-class="{'faNotValid': dailyTracker.submitted}">
+    <fieldset class="margin-top-15">
+        <legend>Exercise Tracker</legend>
+        <div class="form-group">
+            <label class="control-label col-sm-2"><span class="item-req">*</span> Type of exercise</label>
+            <div class="col-sm-4">
+                <select class="form-control" ng-model="dailyTracker.exercise.type" required>
+                    <option selected disabled value="">Select a type of exercise</option>
+                    <option>Aerobic (Cardio)</option>
+                    <option>Strength</option>
+                    <option>Flexibility (Stretching)</option>
+                    <option>Stability (Balance and core)</option>
+                </select>
+            </div>
+            <label class="control-label col-sm-2"><span class="item-req">*</span> Name of exercise</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="Name of exercise activity" ng-model="dailyTracker.exercise.name" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2"><span class="item-req">*</span> Duration (minutes)</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="Duration in minutes" min="0" ng-model="dailyTracker.exercise.duration" required />
+            </div>
+            <label class="control-label col-sm-2" ng-show="dailyTracker.exercise.type === 'Aerobic (Cardio)'"><span class="item-req">*</span> Intensity</label>
+            <div class="col-sm-4" ng-show="dailyTracker.exercise.type === 'Aerobic (Cardio)'">
+                <select class="form-control" ng-model="dailyTracker.exercise.intensity" ng-required="dailyTracker.exercise.type === 'Aerobic (Cardio)'">
+                    <option selected disabled value="">Select intensity</option>
+                    <option>Light</option>
+                    <option>Moderate</option>
+                    <option>High</option>
+                </select>
+            </div>
+            <label class="control-label col-sm-2" ng-show="dailyTracker.exercise.type === 'Strength'">Weight(s) used?</label>
+            <div class="btn-group col-sm-4" ng-show="dailyTracker.exercise.type === 'Strength'">
+                <label class="btn btn-primary" ng-model="dailyTracker.weightUsed" uib-btn-radio="'Yes'">Yes</label>
+                <label class="btn btn-default" ng-model="dailyTracker.weightUsed" uib-btn-radio="'No'">No</label>
+            </div>
+        </div>
+        <div class="form-group" ng-show="dailyTracker.exercise.type !== 'Aerobic (Cardio)' && dailyTracker.exercise.type !== undefined">
+            <label class="control-label col-sm-2">Sets</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="Number of sets" min="0" ng-model="dailyTracker.exercise.sets" />
+            </div>
+            <label class="control-label col-sm-2">Reps</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control" placeholder="Repetitions per set" min="0" ng-model="dailyTracker.exercise.reps" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Notes</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" rows="2" placeholder="Additional notes here" ng-model="dailyTracker.exercise.notes"></textarea>
+            </div>
+            <label class="control-label col-sm-2" ng-show="dailyTracker.weightUsed === 'Yes' && dailyTracker.exercise.type ==='Strength'"><span class="item-req">*</span> Weight(s) (lbs)</label>
+            <div class="col-sm-4" ng-show="dailyTracker.weightUsed === 'Yes' && dailyTracker.exercise.type ==='Strength'">
+                <input type="text" class="form-control" placeholder="Ex: 5, 10, 15" ng-model="dailyTracker.exercise.weight" ng-required="dailyTracker.weightUsed ==='Yes'" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Date</label>
+            <div class="col-sm-4">
+                <fa-date-picker selected-date="dailyTracker.model.selectedDate" editing="exercise.editing"></fa-date-picker>
+            </div>
+            <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
+                <button class="btn btn-primary button-max-width" type="submit" ng-click="dailyTracker.addExercise()">Save</button>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Exercise Completed</legend>
+        <div class="form-group">
+            <div class="table-responsive col-md-12">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="12">Date</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th class="col-sm-2">Type of Exercise</th>
+                            <th class="col-sm-2">Name of Exercise</th>
+                            <th class="col-sm-1">Duration</th>
+                            <th class="col-sm-1">Intensity</th>
+                            <th class="col-sm-1">Sets/Reps</th>
+                            <th class="col-sm-2">Weight(s) used (lbs)</th>
+                            <th class="col-sm-2">Notes</th>
+                            <th class="col-sm-1">Edit/Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in dailyTracker.model.exerciseArr">
+                            <td>{{item.type}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.duration}}</td>
+                            <td>{{item.intensity}}</td>
+                            <td>{{item.sets}} / {{item.reps}}</td>
+                            <td>{{item.weight}}</td>
+                            <td>{{item.notes}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs col-sm-3 col-sm-offset-2" type="submit" ng-click="dailyTracker.editItem($index)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-default btn-xs col-sm-3 col-sm-offset-2" type="submit"><i class="fa fa-times" aria-hidden="true" ng-click="dailyTracker.removeItem($index)"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+</form>
