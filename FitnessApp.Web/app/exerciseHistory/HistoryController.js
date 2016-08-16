@@ -10,7 +10,6 @@
 
         function init() {
             exerciseTrackerService.goToState = $state.current.name;
-            console.log(exerciseTrackerService.goToState);
         }
     }
 
