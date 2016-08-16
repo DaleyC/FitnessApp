@@ -25,11 +25,11 @@
             })
             .state('base.exerciseTracker.dailyTracker', {
                 url: "/daily-tracker",
-                templateUrl: "app/exerciseTracker/dailyTracker.html"
+                templateUrl: "app/dailyExerciseTracker/dailyTracker.html"
             })
             .state('base.exerciseTracker.history', {
                 url: "/exercise-history",
-                templateUrl: "app/exerciseTracker/history.html"
+                templateUrl: "app/exerciseHistory/history.html"
             })
     }
 })();

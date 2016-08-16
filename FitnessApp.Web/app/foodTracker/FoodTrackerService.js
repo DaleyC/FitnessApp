@@ -14,12 +14,6 @@
 
         return service;
 
-        var service = {
-            getFoodForDay: getFoodForDay
-        };
-
-        return service;
-
         function getFoodForDay(date) {
             var model = {
                 date: new Date(),

@@ -28,12 +28,12 @@
     <Content Include="app\base\BaseController.js" />
     <Content Include="app\components\faDatePicker.html" />
     <Content Include="app\components\faDatePicker.js" />
-    <Content Include="app\exerciseTracker\DailyTrackerController.js" />
-    <Content Include="app\exerciseTracker\dailyTracker.html" />
+    <Content Include="app\dailyExerciseTracker\DailyTrackerController.js" />
+    <Content Include="app\dailyExerciseTracker\dailyTracker.html" />
     <Content Include="app\exerciseTracker\exerciseTracker.html" />
     <Content Include="app\exerciseTracker\ExerciseTrackerController.js" />
-    <Content Include="app\exerciseTracker\history.html" />
-    <Content Include="app\exerciseTracker\HistoryController.js" />
+    <Content Include="app\exerciseHistory\history.html" />
+    <Content Include="app\exerciseHistory\HistoryController.js" />
     <Content Include="app\foodTracker\foodTracker.html" />
     <Content Include="app\foodTracker\FoodTrackerController.js" />
     <Content Include="app\foodTracker\foodTrackerService.js" />
@@ -42,7 +42,9 @@
     <Content Include="app\sleepTracker\sleepTracker.html" />
     <Content Include="app\sleepTracker\SleepTrackerController.js" />
     <Content Include="index.html" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="web.Debug.config">

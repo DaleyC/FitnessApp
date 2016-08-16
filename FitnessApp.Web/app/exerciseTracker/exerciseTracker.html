@@ -1,9 +1,9 @@
 ﻿<div ng-controller="ExerciseTrackerController as exerciseTracker">
     <uib-tabset class="exercise-tabs container fa-form" active="exerciseTracker.tabIndex">
-        <uib-tab index="0" heading="Daily Tracker" ui-sref="base.exerciseTracker.dailyTracker" ng-click="exerciseTracker.setRoute(base.exerciseTracker.dailyTracker)">
+        <uib-tab index="0" heading="Daily Tracker" ui-sref="base.exerciseTracker.dailyTracker">
             <div ui-view></div>
         </uib-tab>
-        <uib-tab index="1" heading="Exercise History" ui-sref="base.exerciseTracker.history" ng-click="exerciseTracker.setRoute(base.exerciseTracker.history)">
+        <uib-tab index="1" heading="Exercise History" ui-sref="base.exerciseTracker.history">
             <div ui-view></div>
         </uib-tab>
     </uib-tabset>
