@@ -22,28 +22,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.css" />
-    <Content Include="app\app.js" />
-    <Content Include="app\base\base.html" />
-    <Content Include="app\base\BaseController.js" />
-    <Content Include="app\components\faDatePicker.html" />
-    <Content Include="app\components\faDatePicker.js" />
-    <Content Include="app\exerciseTracker\dailyExerciseTracker\DailyTrackerController.js" />
-    <Content Include="app\exerciseTracker\dailyExerciseTracker\dailyTracker.html" />
-    <Content Include="app\exerciseTracker\exerciseTracker.html" />
-    <Content Include="app\exerciseTracker\ExerciseTrackerController.js" />
-    <Content Include="app\exerciseTracker\exerciseHistory\history.html" />
-    <Content Include="app\exerciseTracker\exerciseHistory\HistoryController.js" />
-    <Content Include="app\foodTracker\foodTracker.html" />
-    <Content Include="app\foodTracker\FoodTrackerController.js" />
-    <Content Include="app\foodTracker\foodTrackerService.js" />
-    <Content Include="app\home\home.html" />
-    <Content Include="app\home\HomeController.js" />
-    <Content Include="app\scripts\angular-off-click.min.js" />
-    <Content Include="app\scripts\ui-bootstrap-tpls-2.0.0.min.js" />
-    <Content Include="app\sleepTracker\sleepTracker.html" />
-    <Content Include="app\sleepTracker\SleepTrackerController.js" />
-    <Content Include="index.html" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
