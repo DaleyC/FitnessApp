@@ -15,17 +15,18 @@
 
         return service;
 
-        function getFoodForDay(date) {
+        function getFoodForDay(selectedDate) {
             return $http({
-                method: 'GET',
-                url: 'api/values'
+                method: 'POST',
+                url: 'api/foodtracker/GetFoodForDay',
+                data: JSON.stringify(selectedDate)
             });
         }
 
         function save(model) {
             return $http({
                 method: 'POST',
-                url: 'api/values',
+                url: 'api/foodtracker/PostFoodForDay',
                 data: model
             });
         }
