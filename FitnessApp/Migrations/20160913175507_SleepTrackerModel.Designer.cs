@@ -8,9 +8,10 @@ using FitnessApp.Data;
 namespace FitnessApp.Migrations
 {
     [DbContext(typeof(FitnessContext))]
-    partial class FitnessContextModelSnapshot : ModelSnapshot
+    [Migration("20160913175507_SleepTrackerModel")]
+    partial class SleepTrackerModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -60,13 +61,13 @@ namespace FitnessApp.Migrations
                     b.Property<DateTime>("SleepDate")
                         .HasColumnType("Date");
 
-                    b.Property<int>("Hours");
+                    b.Property<int>("HoursSlept");
 
                     b.Property<string>("Notes");
 
-                    b.Property<string>("Rating");
+                    b.Property<string>("QualityId");
 
-                    b.Property<string>("TimesWokeUp");
+                    b.Property<string>("WokenId");
 
                     b.HasKey("SleepDate");
 

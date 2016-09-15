@@ -1,11 +1,12 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('FoodTrackerController', FoodTrackerController);
+    angular.module('app').controller('NutritionTrackerController', NutritionTrackerController);
 
-    function FoodTrackerController(foodTrackerService, $scope,$timeout) {
+    function NutritionTrackerController(nutritionTrackerService, $scope, $timeout) {
         var vm = this;
         vm.addMeal = addMeal;
+        vm.addUpdate = "Add Meal";
         vm.editItem = editItem;
         vm.meal = {};
         vm.model = {};
@@ -14,9 +15,9 @@
         vm.remainingCalories = 2000;
         vm.remainingWater = 64;
         vm.removeItem = removeItem;
+        vm.save = save;
         vm.totalCal = 0;
         vm.totalWater = 0;
-        vm.save = save;
 
 
 
@@ -24,13 +25,13 @@
 
         function init() {
             $timeout(function () {
-                getFoodForDay();
+                getNutritionForDay(vm.model.nutritionDate);
             });
             setUpWatches();
         }
 
-        function addMeal(foodTrackerForm) {
-            if (vm.foodTrackerForm.$invalid) {
+        function addMeal(nutritionTrackerForm) {
+            if (vm.nutritionTrackerForm.$invalid) {
                 vm.submitted = true;
                 return;
             }
@@ -41,15 +42,32 @@
                 vm.model.meals.push(angular.copy(vm.meal));
             }
             totalCalories();
+            vm.addUpdate = "Add Meal";
             vm.meal = {};
             vm.editing = false;
             vm.submitted = false;
         }
 
         function editItem(index) {
+            vm.addUpdate = "Update Meal";
             vm.meal = angular.copy(vm.model.meals[index]);
             vm.index = index;
             vm.editing = true;
+        }
+
+        function getNutritionForDay(selectedDate) {
+            var date = moment(vm.model.nutritionDate).format('MM/DD/YYYY');
+            vm.getPromise = nutritionTrackerService.getNutritionForDay(date)
+                .then(function (data) {
+                    vm.model = data.data || vm.model;
+                    vm.model.nutritionDate = selectedDate;
+                });
+
+            return vm.getPromise;
+        }
+
+        function removeItem(index) {
+            vm.model.meals.splice(index, 1);
         }
 
         function setUpWatches() {
@@ -65,8 +83,11 @@
                 );
         }
 
-        function removeItem(index) {
-            vm.model.meals.splice(index, 1);
+        function save() {
+            vm.model.nutritionDate = moment(vm.model.nutritionDate).format('MM/DD/YYYY');
+            nutritionTrackerService.save(vm.model)
+            .then(function () {
+            });
         }
 
         function totalCalories() {
@@ -74,26 +95,6 @@
                 return total += num.calories;
             }, 0);
             vm.remainingCalories = 2000 - vm.totalCal;
-        }
-
-        function getFoodForDay() {
-            var date = moment(vm.model.nutritionDate).format('MM/DD/YYYY');
-            vm.getPromise = foodTrackerService.getFoodForDay(date)
-                .then(function (data) {
-                    console.log(data.data);
-                    vm.model = data.data || vm.model;
-                    vm.model.nutritionDate = moment(vm.model.nutritionDate).toDate();
-                });
-
-            return vm.getPromise;
-        }
-
-        function save() {
-            vm.model.nutritionDate = moment(vm.model.nutritionDate).format('MM/DD/YYYY');
-            foodTrackerService.save(vm.model)
-            .then(function () {
-                console.log('SAVED');
-            });
         }
     }
 

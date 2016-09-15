@@ -2,13 +2,11 @@
 using FitnessApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitnessApp.Services
 {
-    public class FoodTrackerService
+    public class NutritionTrackerService
     {
         private readonly FitnessContext _context = new FitnessContext();
 
@@ -25,7 +23,7 @@ namespace FitnessApp.Services
             {
                 _context.Add(model);
             }
-           else
+            else
             {
                 existing.Water = model.Water;
 
@@ -56,7 +54,7 @@ namespace FitnessApp.Services
 
                     existing.Meals.Add(item);
                 });
-                model.Meals.ToList().ForEach(x => existing.Meals.Add(x));               
+                model.Meals.ToList().ForEach(x => existing.Meals.Add(x));
             }
             _context.SaveChanges();
         }

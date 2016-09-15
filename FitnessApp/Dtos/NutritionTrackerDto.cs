@@ -1,8 +1,6 @@
 ﻿using FitnessApp.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FitnessApp.Data.Dtos
 {
@@ -21,12 +19,16 @@ namespace FitnessApp.Data.Dtos
         public static NutritionTrackerDto FromEntity(NutritionTracker entity)
         {
             var model = new NutritionTrackerDto();
+            if (entity == null)
+            {
+                return model;
+            }
             model.NutritionDate = entity.NutritionDate;
             model.Water = entity.Water;
 
-            foreach(var item in entity.Meals)
+            foreach (var item in entity.Meals)
             {
-                
+
                 model.Meals.Add(NutritionMealsDto.FromEntity(item));
             }
             return model;
@@ -35,7 +37,7 @@ namespace FitnessApp.Data.Dtos
 
     public class NutritionMealsDto
     {
-        public int MealId { get; set; }  
+        public int MealId { get; set; }
         public string MealName { get; set; }
         public string FoodItem { get; set; }
         public int Calories { get; set; }
@@ -47,7 +49,7 @@ namespace FitnessApp.Data.Dtos
         public static NutritionMealsDto FromEntity(NutritionTracker_Meals entity)
         {
             var model = new NutritionMealsDto();
-            //model.MealId = entity.MealId;
+
             model.MealName = entity.MealName;
             model.FoodItem = entity.FoodItem;
             model.Calories = entity.Calories;

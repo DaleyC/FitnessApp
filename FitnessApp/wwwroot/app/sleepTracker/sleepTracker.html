@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Date</label>
                 <div class="col-sm-4">
-                    <fa-date-picker selected-date="sleepTracker.model.selectedDate" editing="sleepTracker.editing"></fa-date-picker>
+                    <fa-date-picker selected-date="sleepTracker.model.sleepDate" editing="sleepTracker.editing"></fa-date-picker>
                     <input type="hidden" name="sameDate" ng-required="sleepTracker.isSameDate() && !sleepTracker.editing" ng-model="alwaysEmpty" />
                     <div ng-show="sleepTracker.sleepTrackerForm.sameDate.$invalid && sleepTracker.submitted"><small class="text-red">* This Date has already been saved</small></div>
                 </div>
@@ -68,7 +68,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in sleepTracker.sleepInfoArr">
-                                <td>{{item.selectedDate | date : fullDate}}</td>
+                                <td>{{item.sleepDate | date : fullDate}}</td>
                                 <td>{{item.hours}}</td>
                                 <td>{{item.timesWokeUp}}</td>
                                 <td>{{item.rating}}</td>

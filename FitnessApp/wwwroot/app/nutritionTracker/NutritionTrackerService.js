@@ -1,24 +1,24 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').factory('foodTrackerService', Service);
+    angular.module('app').factory('nutritionTrackerService', Service);
 
-    function Service($q, $timeout, $http) {
+    function Service($http) {
         var model = {
-            date: new Date(),
-        }
+            date: new Date()
+        };
 
         var service = {
-            getFoodForDay: getFoodForDay,
+            getNutritionForDay: getNutritionForDay,
             save: save
         };
 
         return service;
 
-        function getFoodForDay(selectedDate) {
+        function getNutritionForDay(selectedDate) {
             return $http({
                 method: 'POST',
-                url: 'api/foodtracker/GetFoodForDay',
+                url: 'api/nutritiontracker/GetNutritionForDay',
                 data: JSON.stringify(selectedDate)
             });
         }
@@ -26,7 +26,7 @@
         function save(model) {
             return $http({
                 method: 'POST',
-                url: 'api/foodtracker/PostFoodForDay',
+                url: 'api/nutritiontracker/PostNutritionForDay',
                 data: model
             });
         }

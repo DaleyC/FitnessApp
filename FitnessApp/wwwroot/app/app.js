@@ -23,9 +23,9 @@
                 url: "/exercise-history",
                 templateUrl: "app/exerciseTracker/exerciseHistory/history.html"
             })
-            .state('base.foodTracker', {
-                url: "food-tracker",
-                templateUrl: "app/foodTracker/foodTracker.html"
+            .state('base.nutritionTracker', {
+                url: "nutrition-tracker",
+                templateUrl: "app/nutritionTracker/nutritionTracker.html"
             })
             .state('base.home', {
                 url: "home",
