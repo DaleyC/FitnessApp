@@ -6,7 +6,6 @@
     function NutritionTrackerController(nutritionTrackerService, $scope, $timeout) {
         var vm = this;
         vm.addMeal = addMeal;
-        vm.addUpdate = "Add Meal";
         vm.editItem = editItem;
         vm.meal = {};
         vm.model = {};
@@ -42,14 +41,12 @@
                 vm.model.meals.push(angular.copy(vm.meal));
             }
             totalCalories();
-            vm.addUpdate = "Add Meal";
             vm.meal = {};
             vm.editing = false;
             vm.submitted = false;
         }
 
         function editItem(index) {
-            vm.addUpdate = "Update Meal";
             vm.meal = angular.copy(vm.model.meals[index]);
             vm.index = index;
             vm.editing = true;
@@ -60,9 +57,9 @@
             vm.getPromise = nutritionTrackerService.getNutritionForDay(date)
                 .then(function (data) {
                     vm.model = data.data || vm.model;
-                    vm.model.nutritionDate = selectedDate;
+                    vm.model.nutritionDate = moment(selectedDate).toDate();
+                    totalCalories();
                 });
-
             return vm.getPromise;
         }
 
@@ -78,14 +75,21 @@
                 function (newValue, oldValue) {
                     vm.totalWater = vm.model.water * 8;
                     vm.remainingWater = 64 - vm.totalWater;
+                });
 
-                }
-                );
+            $scope.$watch(
+                function () {
+                    return moment(vm.model.nutritionDate).format('MM/DD/YYYY');
+                },
+                function (newValue, oldValue) {
+                    getNutritionForDay(newValue);
+                });
         }
 
         function save() {
-            vm.model.nutritionDate = moment(vm.model.nutritionDate).format('MM/DD/YYYY');
-            nutritionTrackerService.save(vm.model)
+            var model = angular.copy(vm.model);
+            model.nutritionDate = moment(model.nutritionDate).format('MM/DD/YYYY');
+            nutritionTrackerService.save(model)
             .then(function () {
             });
         }

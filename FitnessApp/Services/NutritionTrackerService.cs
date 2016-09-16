@@ -38,12 +38,13 @@ namespace FitnessApp.Services
                     if (!updatingPks.Contains(item.MealId))
                         return;
 
-                    item.MealName = item.MealName;
-                    item.Calories = item.Calories;
-                    item.Carbs = item.Carbs;
-                    item.Fat = item.Fat;
-                    item.FoodItem = item.FoodItem;
-                    item.Protein = item.Protein;
+                    var meal = model.Meals.Single(x => x.MealId == item.MealId);
+                    item.MealName = meal.MealName;
+                    item.Calories = meal.Calories;
+                    item.Carbs = meal.Carbs;
+                    item.Fat = meal.Fat;
+                    item.FoodItem = meal.FoodItem;
+                    item.Protein = meal.Protein;
                 });
 
                 //insert new
@@ -54,7 +55,6 @@ namespace FitnessApp.Services
 
                     existing.Meals.Add(item);
                 });
-                model.Meals.ToList().ForEach(x => existing.Meals.Add(x));
             }
             _context.SaveChanges();
         }

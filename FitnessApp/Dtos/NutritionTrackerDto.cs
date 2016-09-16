@@ -49,7 +49,7 @@ namespace FitnessApp.Data.Dtos
         public static NutritionMealsDto FromEntity(NutritionTracker_Meals entity)
         {
             var model = new NutritionMealsDto();
-
+            model.MealId = entity.MealId;
             model.MealName = entity.MealName;
             model.FoodItem = entity.FoodItem;
             model.Calories = entity.Calories;

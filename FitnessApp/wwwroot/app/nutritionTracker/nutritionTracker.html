@@ -4,7 +4,7 @@
             <legend>Nutrition Tracker</legend>
             <label class="control-label col-sm-2">Date</label>
             <div class="col-sm-4">
-                <fa-date-picker selected-date="nutritionTracker.model.nutritionDate" editing="nutritionTracker.editing" onchange="nutritionTracker.getNutritionForDay"></fa-date-picker>
+                <fa-date-picker selected-date="nutritionTracker.model.nutritionDate" editing="nutritionTracker.editing"></fa-date-picker>
             </div>
             <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
                 <button class="btn btn-primary button-max-width" ng-click="nutritionTracker.save()">Save</button>
@@ -82,7 +82,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-2 col-md-offset-8 col-sm-3 col-sm-offset-8">
-                    <button class="btn btn-primary" type="submit" name="addMeal" ng-click="nutritionTracker.addMeal()">{{nutritionTracker.addUpdate}}</button>
+                    <button class="btn btn-primary" type="submit" name="addMeal" ng-click="nutritionTracker.addMeal()">{{nutritionTracker.editing ?  'Update Meal' : 'Add Meal'}}</button>
                 </div>
             </div>
         </fieldset>
