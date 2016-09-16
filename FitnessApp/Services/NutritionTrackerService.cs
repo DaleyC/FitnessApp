@@ -12,13 +12,14 @@ namespace FitnessApp.Services
 
         public NutritionTracker GetNutritionForDay(DateTime selectedDate)
         {
-            var model = _context.NutritionTracker.Include(x => x.Meals).SingleOrDefault(x => x.NutritionDate == selectedDate);
+            var model = _context.NutritionTracker.Include(x => x.Meals).SingleOrDefault(x => x.NutritionDate == selectedDate.Date);
             return model;
         }
 
         public void SaveNutritionForDay(NutritionTracker model)
         {
-            var existing = _context.NutritionTracker.Include(x => x.Meals).SingleOrDefault(x => x.NutritionDate == model.NutritionDate);
+            var nutritionDate = model.NutritionDate.Date;
+            var existing = _context.NutritionTracker.Include(x => x.Meals).SingleOrDefault(x => x.NutritionDate == nutritionDate);
             if (existing == null)
             {
                 _context.Add(model);

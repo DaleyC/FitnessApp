@@ -2,12 +2,14 @@
     <form novalidate class="form-horizontal" name="nutritionTracker.nutritionTrackerForm" ng-class="{'faNotValid': nutritionTracker.submitted}">
         <fieldset>
             <legend>Nutrition Tracker</legend>
-            <label class="control-label col-sm-2">Date</label>
-            <div class="col-sm-4">
-                <fa-date-picker selected-date="nutritionTracker.model.nutritionDate" editing="nutritionTracker.editing"></fa-date-picker>
-            </div>
-            <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
-                <button class="btn btn-primary button-max-width" ng-click="nutritionTracker.save()">Save</button>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Date</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" ng-model="nutritionTracker.model.nutritionDate" ng-model-options="{timezone: 'UTC'}" ng-disabled="nutritionTracker.editing"/>
+                </div>
+                <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
+                    <button class="btn btn-primary button-max-width" ng-click="nutritionTracker.save()">Save</button>
+                </div>
             </div>
         </fieldset>
         <fieldset>

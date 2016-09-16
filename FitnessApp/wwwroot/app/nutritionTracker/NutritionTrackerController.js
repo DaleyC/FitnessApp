@@ -23,6 +23,7 @@
         init();
 
         function init() {
+            today();
             $timeout(function () {
                 getNutritionForDay(vm.model.nutritionDate);
             });
@@ -53,11 +54,11 @@
         }
 
         function getNutritionForDay(selectedDate) {
-            var date = moment(vm.model.nutritionDate).format('MM/DD/YYYY');
+            var date = vm.model.nutritionDate;
             vm.getPromise = nutritionTrackerService.getNutritionForDay(date)
                 .then(function (data) {
                     vm.model = data.data || vm.model;
-                    vm.model.nutritionDate = moment(selectedDate).toDate();
+                    vm.model.nutritionDate = selectedDate;
                     totalCalories();
                 });
             return vm.getPromise;
@@ -79,7 +80,7 @@
 
             $scope.$watch(
                 function () {
-                    return moment(vm.model.nutritionDate).format('MM/DD/YYYY');
+                    return vm.model.nutritionDate;
                 },
                 function (newValue, oldValue) {
                     getNutritionForDay(newValue);
@@ -88,10 +89,14 @@
 
         function save() {
             var model = angular.copy(vm.model);
-            model.nutritionDate = moment(model.nutritionDate).format('MM/DD/YYYY');
+            model.nutritionDate = model.nutritionDate;
             nutritionTrackerService.save(model)
             .then(function () {
             });
+        }
+
+        function today() {
+            vm.model.nutritionDate = new Date();
         }
 
         function totalCalories() {
