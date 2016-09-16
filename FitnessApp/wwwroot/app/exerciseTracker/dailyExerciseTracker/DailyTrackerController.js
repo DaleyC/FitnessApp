@@ -16,6 +16,7 @@
         init();
 
         function init() {
+            today();
             exerciseTrackerService.goToState = $state.current.name;
         }
 
@@ -41,6 +42,9 @@
         }
         function removeItem(index) {
             vm.model.exerciseArr.splice(index, 1);
+        }
+        function today() {
+            vm.model.exerciseDate = new Date();
         }
     }
 

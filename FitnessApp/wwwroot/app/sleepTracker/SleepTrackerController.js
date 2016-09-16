@@ -17,6 +17,7 @@
         init();
 
         function init() {
+            today();
             $timeout(function () {
                 getSleepForDay();
             });
@@ -72,6 +73,9 @@
             sleepTrackerService.save(vm.model)
             .then(function () {
             });
+        }
+        function today() {
+            vm.model.sleepDate = new Date();
         }
     }
 })();

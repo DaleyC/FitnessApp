@@ -59,10 +59,10 @@
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Date</label>
-            <div class="col-sm-4">
-                <fa-date-picker selected-date="dailyTracker.model.selectedDate" editing="dailyTracker.editing"></fa-date-picker>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <input type="date" class="form-control" ng-model="dailyTracker.model.exerciseDate" ng-model-options="{timezone: 'UTC'}" ng-disabled="dailyTracker.editing" />
             </div>
-            <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2">
+            <div class="col-md-2 col-md-offset-3 col-sm-3 col-sm-offset-3">
                 <button class="btn btn-primary button-max-width" type="submit" ng-click="dailyTracker.addExercise()">Save</button>
             </div>
         </div>
