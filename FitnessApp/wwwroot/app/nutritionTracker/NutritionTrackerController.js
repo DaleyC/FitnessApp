@@ -3,7 +3,7 @@
 
     angular.module('app').controller('NutritionTrackerController', NutritionTrackerController);
 
-    function NutritionTrackerController(nutritionTrackerService, $scope, $timeout) {
+    function NutritionTrackerController(NutritionTrackerService, $scope, $timeout) {
         var vm = this;
         vm.addMeal = addMeal;
         vm.editItem = editItem;
@@ -17,6 +17,7 @@
         vm.save = save;
         vm.totalCal = 0;
         vm.totalWater = 0;
+        vm.foodSearchOptions = NutritionTrackerService.foodSearchOptions();
 
 
 
@@ -55,7 +56,7 @@
 
         function getNutritionForDay(selectedDate) {
             var date = vm.model.nutritionDate;
-            vm.getPromise = nutritionTrackerService.getNutritionForDay(date)
+            vm.getPromise = NutritionTrackerService.getNutritionForDay(date)
                 .then(function (data) {
                     vm.model = data.data || vm.model;
                     vm.model.nutritionDate = selectedDate;
@@ -90,7 +91,7 @@
         function save() {
             var model = angular.copy(vm.model);
             model.nutritionDate = model.nutritionDate;
-            nutritionTrackerService.save(model)
+            NutritionTrackerService.save(model)
             .then(function () {
             });
         }
