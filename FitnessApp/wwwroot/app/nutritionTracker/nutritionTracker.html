@@ -1,5 +1,5 @@
-﻿<div class="container fa-form" ng-controller="NutritionTrackerController as nutritionTracker">
-    <form novalidate class="form-horizontal" name="nutritionTracker.nutritionTrackerForm" ng-class="{'faNotValid': nutritionTracker.submitted}">
+﻿<div class="container ft-form" ng-controller="NutritionTrackerController as nutritionTracker">
+    <form novalidate class="form-horizontal" name="nutritionTracker.nutritionTrackerForm" ng-class="{'ftNotValid': nutritionTracker.submitted}">
         <fieldset>
             <legend>Nutrition Tracker</legend>
             <div class="form-group">
@@ -65,7 +65,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2"><span class="item-req">*</span>Servings</label>
                 <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Servings" ng-model="nutritionTracker.servings" min="0" required />
+                    <input type="number" class="form-control" placeholder="Servings" ng-model="nutritionTracker.meal.servings" min="0" />
                 </div>
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Calories</label>
                 <div class="col-sm-4">
@@ -105,8 +105,9 @@
                         <thead>
                             <tr>
                                 <th class="col-md-2">Meal</th>
-                                <th class="col-md-3">Food item</th>
-                                <th class="col-md-2">Calories</th>
+                                <th class="col-md-2">Food item</th>
+                                <th class="col-md-2">Servings</th>
+                                <th class="col-md-1">Calories</th>
                                 <th class="col-md-1">Fat (g)</th>
                                 <th class="col-md-1">Carbs (g)</th>
                                 <th class="col-md-1">Protein (g)</th>
@@ -118,6 +119,7 @@
                             <tr ng-repeat="meal in nutritionTracker.model.meals">
                                 <td>{{meal.mealName}}</td>
                                 <td>{{meal.foodItem}}</td>
+                                <td>{{meal.servings}}</td>
                                 <td>{{meal.calories}}</td>
                                 <td>{{meal.fat}}</td>
                                 <td>{{meal.carbs}}</td>

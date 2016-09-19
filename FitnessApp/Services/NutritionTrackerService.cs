@@ -41,10 +41,11 @@ namespace FitnessApp.Services
 
                     var meal = model.Meals.Single(x => x.MealId == item.MealId);
                     item.MealName = meal.MealName;
+                    item.FoodItem = meal.FoodItem;
+                    item.Servings = meal.Servings;
                     item.Calories = meal.Calories;
                     item.Carbs = meal.Carbs;
                     item.Fat = meal.Fat;
-                    item.FoodItem = meal.FoodItem;
                     item.Protein = meal.Protein;
                 });
 

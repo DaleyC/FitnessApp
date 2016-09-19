@@ -90,7 +90,6 @@
 
         function save() {
             var model = angular.copy(vm.model);
-            model.nutritionDate = model.nutritionDate;
             NutritionTrackerService.save(model)
             .then(function () {
             });
