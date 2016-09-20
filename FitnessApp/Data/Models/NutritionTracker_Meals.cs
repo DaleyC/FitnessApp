@@ -11,7 +11,6 @@ namespace FitnessApp.Data.Models
 
         public string MealName { get; set; }
         public string FoodItem { get; set; }
-        public int Servings { get; set; }
         public int Calories { get; set; }
         public int Fat { get; set; }
         public int Carbs { get; set; }

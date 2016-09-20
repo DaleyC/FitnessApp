@@ -11,10 +11,18 @@
         var service = {
             getNutritionForDay: getNutritionForDay,
             save: save,
-            foodSearchOptions: foodSearchOptions
+            foodSearchOptions: foodSearchOptions,
+            getFoodData: getFoodData
         };
 
         return service;
+
+        function getFoodData(foodId) {
+            return $http({
+                method: 'GET',
+                url: 'http://api.nal.usda.gov/ndb/reports/?type=b&format=json&api_key=ctLmQeWtt1VxRCibpTXGrRO5talnsxCoYZglN6he&ndbno=' + foodId
+            })
+        }
 
         function getNutritionForDay(selectedDate) {
             return $http({
@@ -34,18 +42,28 @@
         function foodSearchOptions() {
             return {
                 minimumInputLength: 3,
-                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-                    url: "https://api.github.com/search/repositories",
-
-                    data: function (term, page) {
-                        return {
-                            q: term, // search term
-                        };
-                    },
-                    results: function (data, page) { // parse the results into the format expected by Select2.
-                        // since we are using custom formatting functions we do not need to alter the remote JSON data
-                        return { results: data.items };
+                query: function (query) {
+                    if (query.term === '') {
+                        return;
                     }
+                    $http({
+                        method: 'GET',
+                        url: 'http://api.nal.usda.gov/ndb/search/?format=json&sort=n&max=25&offset=0&api_key=ctLmQeWtt1VxRCibpTXGrRO5talnsxCoYZglN6he&q=' + query.term
+                    })
+                        .then(function (data) {
+                            var results = { results: [] };
+                            if (data.data.list) {
+                                angular.forEach(data.data.list.item, function (value, key) {
+                                    value.id = value.ndbno;
+                                    value.text = value.name;
+                                    results.results.push(value);
+                                });
+                            }
+                            query.callback(results);
+                        })
+                                .catch(function (data) {
+                                    $log.warn(data);
+                                });
                 }
             }
         }

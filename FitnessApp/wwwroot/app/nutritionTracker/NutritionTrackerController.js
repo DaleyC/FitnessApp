@@ -18,8 +18,8 @@
         vm.totalCal = 0;
         vm.totalWater = 0;
         vm.foodSearchOptions = NutritionTrackerService.foodSearchOptions();
-
-
+        vm.getFoodInfo = getFoodInfo;
+        vm.getFoodData = getFoodData;
 
         init();
 
@@ -46,12 +46,36 @@
             vm.meal = {};
             vm.editing = false;
             vm.submitted = false;
+            vm.foodSelection = null;
         }
 
         function editItem(index) {
             vm.meal = angular.copy(vm.model.meals[index]);
             vm.index = index;
             vm.editing = true;
+            vm.foodSelection = {
+                id: null,
+                text: vm.meal.foodItem
+            };
+        }
+        function getFoodData(foodId) {
+            vm.getPromise = NutritionTrackerService.getFoodData(foodId)
+                .then(function (data) {
+                    vm.meal.calories = Math.round(parseFloat(data.data.report.food.nutrients[0].value));
+                    vm.meal.fat = Math.round(parseFloat(data.data.report.food.nutrients[2].value));
+                    vm.meal.carbs = Math.round(parseFloat(data.data.report.food.nutrients[3].value));
+                    vm.meal.protein = Math.round(parseFloat(data.data.report.food.nutrients[1].value));
+                });
+            return vm.getPromise;
+        }
+
+        function getFoodInfo() {
+            if (!vm.foodSelection) {
+                return;
+            }
+            vm.meal.foodItem = vm.foodSelection.name;
+            vm.getFoodData(vm.foodSelection.id);
+            vm.foodItemReq = false;
         }
 
         function getNutritionForDay(selectedDate) {

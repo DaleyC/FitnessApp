@@ -59,27 +59,17 @@
                 </div>
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Food Item</label>
                 <div class="col-sm-4">
-                    <input type="hidden" ui-select2="nutritionTracker.foodSearchOptions" ng-model="nutritionTracker.foodOptions" data-placeholder="Food Item"/>
+                    <input type="hidden" class="form-control" ng-change="nutritionTracker.getFoodInfo()" ui-select2="nutritionTracker.foodSearchOptions" ng-model="nutritionTracker.foodSelection" data-placeholder="Food Item" required/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><span class="item-req">*</span>Servings</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Servings" ng-model="nutritionTracker.meal.servings" min="0" />
-                </div>
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Calories</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" placeholder="Calories" ng-model="nutritionTracker.meal.calories" min="0" required />
                 </div>
-            </div>
-            <div class="form-group">
                 <label class="control-label col-sm-2">Fat (g)</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" placeholder="Fat" ng-model="nutritionTracker.meal.fat" min="0" />
-                </div>
-                <label class="control-label col-sm-2">Protein (g)</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control" placeholder="Protein" ng-model="nutritionTracker.meal.protein" min="0" />
                 </div>
             </div>
             <div class="form-group">
@@ -87,7 +77,13 @@
                 <div class="col-sm-4">
                     <input type="number" class="form-control" placeholder="Carbs" ng-model="nutritionTracker.meal.carbs" min="0" />
                 </div>
-                <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-2 col-xs-12">
+                <label class="control-label col-sm-2">Protein (g)</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" placeholder="Protein" ng-model="nutritionTracker.meal.protein" min="0" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-2 col-md-offset-8 col-sm-3 col-sm-offset-8 col-xs-12">
                     <button class="btn btn-primary button-max-width" type="submit" name="addMeal" ng-click="nutritionTracker.addMeal()">{{nutritionTracker.editing ?  'Update Meal' : 'Add Meal'}}</button>
                 </div>
             </div>
@@ -104,9 +100,8 @@
                         </thead>
                         <thead>
                             <tr>
-                                <th class="col-md-2">Meal</th>
-                                <th class="col-md-2">Food item</th>
-                                <th class="col-md-2">Servings</th>
+                                <th class="col-md-3">Meal</th>
+                                <th class="col-md-3">Food item</th>
                                 <th class="col-md-1">Calories</th>
                                 <th class="col-md-1">Fat (g)</th>
                                 <th class="col-md-1">Carbs (g)</th>
@@ -119,7 +114,6 @@
                             <tr ng-repeat="meal in nutritionTracker.model.meals">
                                 <td>{{meal.mealName}}</td>
                                 <td>{{meal.foodItem}}</td>
-                                <td>{{meal.servings}}</td>
                                 <td>{{meal.calories}}</td>
                                 <td>{{meal.fat}}</td>
                                 <td>{{meal.carbs}}</td>

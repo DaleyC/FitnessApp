@@ -1,4 +1,5 @@
 ﻿using FitnessApp.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,6 +21,10 @@ namespace FitnessApp.Services
             if (existing == null)
             {
                 _context.SleepTracker.Add(model);
+            }
+            else
+            {
+                _context.Remove(existing);
             }
             _context.SaveChanges();
         }
