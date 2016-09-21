@@ -10,7 +10,8 @@
 
         var service = {
             getSleepForDay: getSleepForDay,
-            save: save
+            save: save,
+            removeDate: removeDate
         };
 
         return service;
@@ -20,6 +21,13 @@
                 method: 'POST',
                 url: 'api/sleeptracker/GetSleepForDay'
             });
+        }
+        function removeDate(date) {
+            return $http({
+                method: 'POST',
+                url: 'api/sleeptracker/RemoveDate',
+                data: JSON.stringify(date)
+            })
         }
 
         function save(model) {

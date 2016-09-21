@@ -61,10 +61,10 @@
         function getFoodData(foodId) {
             vm.getPromise = NutritionTrackerService.getFoodData(foodId)
                 .then(function (data) {
-                    vm.meal.calories = Math.round(parseFloat(data.data.report.food.nutrients[0].value));
-                    vm.meal.fat = Math.round(parseFloat(data.data.report.food.nutrients[2].value));
-                    vm.meal.carbs = Math.round(parseFloat(data.data.report.food.nutrients[3].value));
-                    vm.meal.protein = Math.round(parseFloat(data.data.report.food.nutrients[1].value));
+                    vm.meal.calories = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Energy'; }).value));
+                    vm.meal.fat = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Total lipid (fat)'; }).value));
+                    vm.meal.carbs = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Carbohydrate, by difference'; }).value));
+                    vm.meal.protein = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Protein'; }).value));
                 });
             return vm.getPromise;
         }

@@ -22,10 +22,17 @@ namespace FitnessApp.Services
             {
                 _context.SleepTracker.Add(model);
             }
-            else
+            _context.SaveChanges();
+        }
+
+        public void RemoveDate(DateTime date)
+        {
+            var existing = _context.SleepTracker.SingleOrDefault(x => x.SleepDate == date.Date);
+            if (existing != null)
             {
                 _context.Remove(existing);
             }
+
             _context.SaveChanges();
         }
     }

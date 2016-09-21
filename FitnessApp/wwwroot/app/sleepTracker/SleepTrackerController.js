@@ -10,9 +10,10 @@
         vm.editItem = editItem;
         vm.isSameDate = isSameDate;
         vm.model = {};
-        vm.removeItem = removeItem;
+        vm.removeDate = removeDate;
         vm.save = save;
         vm.sleepInfoArr = [];
+        vm.sameDate;
 
         init();
 
@@ -32,9 +33,6 @@
                 vm.sleepInfoArr[vm.index] = angular.copy(vm.model);
             }
             save();
-            $timeout(function () {
-                getSleepForDay();
-            });
             vm.model = {};
             vm.submitted = false;
             vm.editing = false;
@@ -50,28 +48,32 @@
             vm.getPromise = sleepTrackerService.getSleepForDay()
                 .then(function (data) {
                     vm.sleepInfoArr = data.data;
+                    isSameDate();
                 });
             return vm.getPromise;
         }
 
         function isSameDate() {
-            var sameDate = vm.sleepInfoArr.some(function (element) {
+            vm.sameDate = vm.sleepInfoArr.some(function (element) {
                 return moment(element.sleepDate).format("MM-DD-YYYY") === moment(vm.model.sleepDate).format("MM-DD-YYYY");
             });
             if (vm.model.sleepDate === undefined) {
                 sameDate = false;
             }
-            return sameDate;
         }
 
-        function removeItem(index) {
-            vm.sleepInfoArr.splice(index, 1);
+        function removeDate(date) {
+            sleepTrackerService.removeDate(date)
+            .then(function () {
+                getSleepForDay();
+            });
         }
 
         function save() {
-            vm.model.sleepDate = moment(vm.model.sleepDate).format('MM/DD/YYYY');
-            sleepTrackerService.save(vm.model)
+            var model = angular.copy(vm.model);
+            sleepTrackerService.save(model)
             .then(function () {
+                getSleepForDay();
             });
         }
         function today() {

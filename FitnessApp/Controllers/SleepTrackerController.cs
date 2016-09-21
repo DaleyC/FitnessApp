@@ -26,5 +26,13 @@ namespace FitnessApp.Controllers
             _sleepTrackerService.SaveSleepForDay(model);
             return Ok();
         }
+
+        [HttpPost("RemoveDate")]
+        public IActionResult RemoveDate([FromBody] DateTime date)
+        {
+            _sleepTrackerService.RemoveDate(date);
+            return Ok();
+        }
     }
+
 }
