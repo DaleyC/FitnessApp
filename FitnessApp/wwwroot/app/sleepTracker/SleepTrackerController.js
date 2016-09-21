@@ -29,9 +29,6 @@
                 vm.submitted = true;
                 return;
             }
-            else if (vm.editing) {
-                vm.sleepInfoArr[vm.index] = angular.copy(vm.model);
-            }
             save();
             vm.model = {};
             vm.submitted = false;
@@ -40,6 +37,7 @@
 
         function editItem(index) {
             vm.model = angular.copy(vm.sleepInfoArr[index]);
+            vm.model.sleepDate = new Date(vm.model.sleepDate);
             vm.index = index;
             vm.editing = true;
         }

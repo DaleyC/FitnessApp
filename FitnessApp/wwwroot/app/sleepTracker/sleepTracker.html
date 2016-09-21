@@ -37,7 +37,7 @@
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Date</label>
                 <div class="col-md-3 col-sm-3 col-xs-12">
                     <input type="date" class="form-control" ng-model="sleepTracker.model.sleepDate" ng-model-options="{timezone: 'UTC'}" ng-disabled="sleepTracker.editing" ng-change="sleepTracker.isSameDate()" />
-                    <input type="hidden" name="sameDate" ng-required="sleepTracker.sameDate" ng-model="alwaysEmpty" />
+                    <input type="hidden" name="sameDate" ng-required="sleepTracker.sameDate && !sleepTracker.editing" ng-model="alwaysEmpty" />
                     <div ng-show="sleepTracker.sleepTrackerForm.sameDate.$invalid && sleepTracker.submitted"><small class="text-red">* This Date has already been saved</small></div>
                 </div>
                 <div class="col-md-2 col-md-offset-3 col-sm-3 col-sm-offset-3">

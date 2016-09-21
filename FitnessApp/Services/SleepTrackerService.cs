@@ -22,6 +22,13 @@ namespace FitnessApp.Services
             {
                 _context.SleepTracker.Add(model);
             }
+            else
+            {
+                existing.Hours = model.Hours;
+                existing.TimesWokeUp = model.TimesWokeUp;
+                existing.Rating = model.Rating;
+                existing.Notes = model.Notes;
+            }
             _context.SaveChanges();
         }
 
