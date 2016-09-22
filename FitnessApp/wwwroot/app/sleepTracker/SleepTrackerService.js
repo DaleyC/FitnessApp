@@ -10,8 +10,8 @@
 
         var service = {
             getSleepForDay: getSleepForDay,
-            save: save,
-            removeDate: removeDate
+            removeDate: removeDate,
+            save: save
         };
 
         return service;
@@ -22,6 +22,7 @@
                 url: 'api/sleeptracker/GetSleepForDay'
             });
         }
+
         function removeDate(date) {
             return $http({
                 method: 'POST',

@@ -9,36 +9,14 @@
         };
 
         var service = {
-            getNutritionForDay: getNutritionForDay,
-            save: save,
             foodSearchOptions: foodSearchOptions,
-            getFoodData: getFoodData
+            getFoodData: getFoodData,
+            getNutritionForDay: getNutritionForDay,
+            save: save
         };
 
         return service;
 
-        function getFoodData(foodId) {
-            return $http({
-                method: 'GET',
-                url: 'http://api.nal.usda.gov/ndb/reports/?type=b&format=json&api_key=ctLmQeWtt1VxRCibpTXGrRO5talnsxCoYZglN6he&ndbno=' + foodId
-            })
-        }
-
-        function getNutritionForDay(selectedDate) {
-            return $http({
-                method: 'POST',
-                url: 'api/nutritiontracker/GetNutritionForDay',
-                data: JSON.stringify(selectedDate)
-            });
-        }
-
-        function save(model) {
-            return $http({
-                method: 'POST',
-                url: 'api/nutritiontracker/PostNutritionForDay',
-                data: model
-            });
-        }
         function foodSearchOptions() {
             return {
                 minimumInputLength: 3,
@@ -66,6 +44,29 @@
                                 });
                 }
             }
+        }
+
+        function getFoodData(foodId) {
+            return $http({
+                method: 'GET',
+                url: 'http://api.nal.usda.gov/ndb/reports/?type=b&format=json&api_key=ctLmQeWtt1VxRCibpTXGrRO5talnsxCoYZglN6he&ndbno=' + foodId
+            })
+        }
+
+        function getNutritionForDay(selectedDate) {
+            return $http({
+                method: 'POST',
+                url: 'api/nutritiontracker/GetNutritionForDay',
+                data: JSON.stringify(selectedDate)
+            });
+        }
+
+        function save(model) {
+            return $http({
+                method: 'POST',
+                url: 'api/nutritiontracker/PostNutritionForDay',
+                data: model
+            });
         }
     }
 })();

@@ -7,6 +7,9 @@
         var vm = this;
         vm.addMeal = addMeal;
         vm.editItem = editItem;
+        vm.foodSearchOptions = NutritionTrackerService.foodSearchOptions();
+        vm.getFoodData = getFoodData;
+        vm.getFoodInfo = getFoodInfo;
         vm.meal = {};
         vm.model = {};
         vm.model.meals = [];
@@ -17,9 +20,6 @@
         vm.save = save;
         vm.totalCal = 0;
         vm.totalWater = 0;
-        vm.foodSearchOptions = NutritionTrackerService.foodSearchOptions();
-        vm.getFoodInfo = getFoodInfo;
-        vm.getFoodData = getFoodData;
 
         init();
 
@@ -93,6 +93,13 @@
             vm.model.meals.splice(index, 1);
         }
 
+        function save() {
+            var model = angular.copy(vm.model);
+            NutritionTrackerService.save(model)
+            .then(function () {
+            });
+        }
+
         function setUpWatches() {
             $scope.$watch(
                 function () {
@@ -110,13 +117,6 @@
                 function (newValue, oldValue) {
                     getNutritionForDay(newValue);
                 });
-        }
-
-        function save() {
-            var model = angular.copy(vm.model);
-            NutritionTrackerService.save(model)
-            .then(function () {
-            });
         }
 
         function today() {
