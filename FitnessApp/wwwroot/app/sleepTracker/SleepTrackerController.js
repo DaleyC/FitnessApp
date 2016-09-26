@@ -8,14 +8,16 @@
 
         vm.addSleepDate = addSleepDate;
         vm.data = [];
-        vm.start = 0;
+        vm.daysPerPage = 10;
         vm.editItem = editItem;
+        vm.numFilter = numFilter;
         vm.isSameDate = isSameDate;
         vm.model = {};
         vm.nextPage = nextPage;
         vm.prevPage = prevPage;
         vm.removeDate = removeDate;
         vm.sleepInfoArr = [];
+        vm.startDate = 0;
 
         init();
 
@@ -37,10 +39,14 @@
             vm.editing = false;
         }
 
-        function dispDates() {
+        function displayDates() {
+            vm.numOfPages = Math.ceil(vm.sleepInfoArr.length / vm.daysPerPage);
             vm.data = angular.copy(vm.sleepInfoArr);
-            var end = vm.start + 7;
-            vm.data = vm.data.slice(vm.start, end);
+            vm.endDate = vm.startDate + vm.daysPerPage;
+            vm.data = vm.data.slice(vm.startDate, vm.endDate);
+            if (vm.data.length === 0) {
+                prevPage();
+            }
             nextDis();
             prevDis();
         }
@@ -56,10 +62,19 @@
                 .then(function (data) {
                     vm.sleepInfoArr = data.data;
                     vm.sleepInfoArr.reverse();
-                    dispDates();
+                    displayDates();
                     isSameDate();
                 });
             return vm.getPromise;
+        }
+
+        function numFilter() {
+            if (!vm.numberFilter) {
+                vm.daysPerPage = 10;
+            }
+            vm.daysPerPage = parseInt(vm.numberFilter);
+            vm.startDate = 0;
+            displayDates();
         }
 
         function isSameDate() {
@@ -72,30 +87,31 @@
         }
 
         function nextDis() {
-            var numOfPages = Math.ceil(vm.sleepInfoArr.length / 7);
-            if ((Math.ceil(vm.start / 7) + 1) === numOfPages) {
-                vm.nextDisabled = true;
+            if ((Math.ceil(vm.endDate / vm.daysPerPage)) === vm.numOfPages) {
+                vm.nextButtonDisabled = true;
             }
-            else { vm.nextDisabled = false; }
+            else {
+                vm.nextButtonDisabled = false;
+            }
         }
 
         function nextPage() {
-            vm.start += 7;
-            dispDates();
+            vm.startDate += vm.daysPerPage;
+            displayDates();
         }
 
         function prevDis() {
-            if (vm.start === 0) {
-                vm.prevDisabled = true;
+            if (vm.startDate === 0) {
+                vm.prevButtonDisabled = true;
             }
             else {
-                vm.prevDisabled = false;
+                vm.prevButtonDisabled = false;
             }
         }
 
         function prevPage() {
-            vm.start -= 7;
-            dispDates();
+            vm.startDate -= vm.daysPerPage;
+            displayDates();
         }
 
         function removeDate(date) {
