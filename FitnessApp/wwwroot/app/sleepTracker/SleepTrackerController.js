@@ -7,17 +7,17 @@
         var vm = this;
 
         vm.addSleepDate = addSleepDate;
-        vm.data = [];
-        vm.daysPerPage = 10;
         vm.editItem = editItem;
-        vm.numFilter = numFilter;
         vm.isSameDate = isSameDate;
         vm.model = {};
         vm.nextPage = nextPage;
+        vm.numDaysPerPage = 10;
+        vm.numFilter = numFilter;
         vm.prevPage = prevPage;
         vm.removeDate = removeDate;
+        vm.setDateRange = setDateRange;
         vm.sleepInfoArr = [];
-        vm.startDate = 0;
+        vm.startDateIndex = 0;
 
         init();
 
@@ -39,18 +39,6 @@
             vm.editing = false;
         }
 
-        function displayDates() {
-            vm.numOfPages = Math.ceil(vm.sleepInfoArr.length / vm.daysPerPage);
-            vm.data = angular.copy(vm.sleepInfoArr);
-            vm.endDate = vm.startDate + vm.daysPerPage;
-            vm.data = vm.data.slice(vm.startDate, vm.endDate);
-            if (vm.data.length === 0) {
-                prevPage();
-            }
-            nextDis();
-            prevDis();
-        }
-
         function editItem(index) {
             vm.model = angular.copy(vm.sleepInfoArr[index]);
             vm.model.sleepDate = new Date(vm.model.sleepDate);
@@ -62,7 +50,7 @@
                 .then(function (data) {
                     vm.sleepInfoArr = data.data;
                     vm.sleepInfoArr.reverse();
-                    displayDates();
+                    setDateRange();
                     isSameDate();
                 });
             return vm.getPromise;
@@ -70,11 +58,11 @@
 
         function numFilter() {
             if (!vm.numberFilter) {
-                vm.daysPerPage = 10;
+                vm.numDaysPerPage = 10;
             }
-            vm.daysPerPage = parseInt(vm.numberFilter);
-            vm.startDate = 0;
-            displayDates();
+            vm.numDaysPerPage = parseInt(vm.numberFilter);
+            vm.startDateIndex = 0;
+            setDatesDisplayed();
         }
 
         function isSameDate() {
@@ -86,8 +74,8 @@
             }
         }
 
-        function nextDis() {
-            if ((Math.ceil(vm.endDate / vm.daysPerPage)) === vm.numOfPages) {
+        function nextDisabled() {
+            if ((Math.ceil(vm.endDateIndex / vm.numDaysPerPage)) === vm.numOfPages || vm.datesDisplayed.length === 0) {
                 vm.nextButtonDisabled = true;
             }
             else {
@@ -96,12 +84,12 @@
         }
 
         function nextPage() {
-            vm.startDate += vm.daysPerPage;
-            displayDates();
+            vm.startDateIndex += vm.numDaysPerPage;
+            setDatesDisplayed();
         }
 
-        function prevDis() {
-            if (vm.startDate === 0) {
+        function prevDisabled() {
+            if (vm.startDateIndex === 0 || vm.datesDisplayed.length === 0) {
                 vm.prevButtonDisabled = true;
             }
             else {
@@ -110,8 +98,8 @@
         }
 
         function prevPage() {
-            vm.startDate -= vm.daysPerPage;
-            displayDates();
+            vm.startDateIndex -= vm.numDaysPerPage;
+            setDatesDisplayed();
         }
 
         function removeDate(date) {
@@ -127,6 +115,36 @@
             .then(function () {
                 getSleepForDay();
             });
+        }
+
+        function setDateRange() {
+            if (!vm.dateRangeStart || !vm.dateRangeEnd) {
+                vm.filteredArray = angular.copy(vm.sleepInfoArr);
+            }
+            else if (vm.dateRangeStart && vm.dateRangeEnd) {
+                vm.filteredArray = [];
+                for (var i = 0; i < vm.sleepInfoArr.length; i++) {
+                    if (moment(vm.sleepInfoArr[i].sleepDate).isSameOrAfter(vm.dateRangeStart) && moment(vm.sleepInfoArr[i].sleepDate).isSameOrBefore(vm.dateRangeEnd)) {
+                        vm.filteredArray.push(vm.sleepInfoArr[i]);
+                    }
+                }
+            }
+            else {
+                return;
+            }
+            setDatesDisplayed();
+        }
+
+        function setDatesDisplayed() {
+            vm.datesDisplayed = angular.copy(vm.filteredArray);
+            vm.numOfPages = Math.ceil(vm.filteredArray.length / vm.numDaysPerPage);
+            vm.endDateIndex = vm.startDateIndex + vm.numDaysPerPage;
+            vm.datesDisplayed = vm.datesDisplayed.slice(vm.startDateIndex, vm.endDateIndex);
+            if (vm.datesDisplayed.length === 0 && vm.startDateIndex != 0) {
+                prevPage();
+            }
+            nextDisabled();
+            prevDisabled();
         }
 
         function today() {
