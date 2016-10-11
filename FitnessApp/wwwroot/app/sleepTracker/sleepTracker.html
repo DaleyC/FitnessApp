@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Date</label>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="date" class="form-control" ng-model="sleepTracker.sleepDataObject.sleepDate" ng-model-options="{timezone: 'UTC'}" ng-disabled="sleepTracker.editing" ng-change="sleepTracker.checkDateExists()" />
+                    <input type="date" class="form-control" ng-model="sleepTracker.sleepDataObject.sleepDate" ng-disabled="sleepTracker.editing" ng-change="sleepTracker.checkDateExists()" />
                     <input type="hidden" name="dateExists" ng-required="sleepTracker.dateExists && !sleepTracker.editing" ng-model="alwaysEmpty" />
                     <div ng-show="sleepTracker.sleepTrackerForm.dateExists.$invalid && sleepTracker.submitted"><small class="text-red">* This Date has already been saved</small></div>
                 </div>
@@ -50,10 +50,10 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Date Range</label>
                 <div class="col-md-2 col-sm-3">
-                    <input type="date" class="form-control" ng-model="sleepTracker.dateRangeStart" ng-model-options="{timezone: 'UTC'}" ng-change="sleepTracker.setDateRange()" />
+                    <input type="date" class="form-control" ng-model="sleepTracker.dateRangeStart" ng-change="sleepTracker.setDateRange()" />
                 </div>
                 <div class="col-md-2 col-sm-3">
-                    <input type="date" class="form-control" ng-model="sleepTracker.dateRangeEnd" ng-model-options="{timezone: 'UTC'}" ng-change="sleepTracker.setDateRange()" />
+                    <input type="date" class="form-control" ng-model="sleepTracker.dateRangeEnd" ng-change="sleepTracker.setDateRange()" />
                 </div>
                 <label class="control-label col-sm-2">Days per page</label>
                 <div class="col-sm-2">

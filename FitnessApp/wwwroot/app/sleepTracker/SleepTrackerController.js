@@ -113,7 +113,7 @@
                 getSleepForDay();
                 vm.submitted = false;
                 vm.editing = false;
-                vm.sleepDataObject = [];
+                vm.sleepDataObject = {};
             });
         }
 
