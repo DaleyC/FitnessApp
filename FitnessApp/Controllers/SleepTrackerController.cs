@@ -27,10 +27,10 @@ namespace FitnessApp.Controllers
             return Ok();
         }
 
-        [HttpPost("RemoveDate")]
-        public IActionResult RemoveDate([FromBody] DateTime date)
+        [HttpPost("DeleteDataForDate")]
+        public IActionResult DeleteDataForDate([FromBody] DateTime date)
         {
-            _sleepTrackerService.RemoveDate(date);
+            _sleepTrackerService.DeleteDataForDate(date);
             return Ok();
         }
     }

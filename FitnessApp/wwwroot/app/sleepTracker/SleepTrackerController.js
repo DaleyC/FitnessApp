@@ -7,24 +7,24 @@
         var vm = this;
 
         vm.addSleepDate = addSleepDate;
+        vm.checkDateExists = checkDateExists;
+        vm.decreasePage = decreasePage;
+        vm.deleteDataForDate = deleteDataForDate;
         vm.editItem = editItem;
-        vm.isSameDate = isSameDate;
-        vm.model = {};
-        vm.nextPage = nextPage;
+        vm.increasePage = increasePage;
         vm.numDaysPerPage = 10;
         vm.numFilter = numFilter;
-        vm.prevPage = prevPage;
-        vm.removeDate = removeDate;
         vm.setDateRange = setDateRange;
+        vm.sleepDataObject = {};
         vm.sleepInfoArr = [];
         vm.startDateIndex = 0;
 
         init();
 
         function init() {
-            today();
             $timeout(function () {
                 getSleepForDay();
+                vm.sleepDataObject.sleepDate = new Date();
             });
         }
 
@@ -34,14 +34,49 @@
                 return;
             }
             save();
-            vm.model = {};
-            vm.submitted = false;
-            vm.editing = false;
+        }
+
+        function checkDateExists() {
+            vm.dateExists = vm.sleepInfoArr.some(function (element) {
+                return (vm.sleepDataObject.sleepDate && moment(element.sleepDate).format("MM-DD-YYYY") === moment(vm.sleepDataObject.sleepDate).format("MM-DD-YYYY"));
+            });
+            return false;
+        }
+
+        function decreasePage() {
+            vm.startDateIndex -= vm.numDaysPerPage;
+            setDatesDisplayed();
+        }
+
+        function deleteDataForDate(date) {
+            sleepTrackerService.deleteDataForDate(date)
+            .then(function () {
+                getSleepForDay();
+            });
+        }
+
+        function disableNextButton() {
+            var thisPage = Math.ceil(vm.endDateIndex / vm.numDaysPerPage);
+            if (thisPage === vm.numOfPages || vm.datesDisplayed.length === 0) {
+                vm.nextButtonDisabled = true;
+            }
+            else {
+                vm.nextButtonDisabled = false;
+            }
+        }
+
+        function disablePreviousButton() {
+            if (vm.startDateIndex === 0 || vm.datesDisplayed.length === 0) {
+                vm.prevButtonDisabled = true;
+            }
+            else {
+                vm.prevButtonDisabled = false;
+            }
         }
 
         function editItem(index) {
-            vm.model = angular.copy(vm.sleepInfoArr[index]);
-            vm.model.sleepDate = new Date(vm.model.sleepDate);
+            vm.sleepDataObject = angular.copy(vm.sleepInfoArr[index]);
+            vm.sleepDataObject.sleepDate = moment(vm.sleepDataObject.sleepDate).toDate();
             vm.editing = true;
         }
 
@@ -51,9 +86,14 @@
                     vm.sleepInfoArr = data.data;
                     vm.sleepInfoArr.reverse();
                     setDateRange();
-                    isSameDate();
+                    checkDateExists();
                 });
             return vm.getPromise;
+        }
+
+        function increasePage() {
+            vm.startDateIndex += vm.numDaysPerPage;
+            setDatesDisplayed();
         }
 
         function numFilter() {
@@ -65,72 +105,36 @@
             setDatesDisplayed();
         }
 
-        function isSameDate() {
-            vm.sameDate = vm.sleepInfoArr.some(function (element) {
-                return moment(element.sleepDate).format("MM-DD-YYYY") === moment(vm.model.sleepDate).format("MM-DD-YYYY");
-            });
-            if (vm.model.sleepDate === undefined) {
-                vm.sameDate = false;
-            }
-        }
-
-        function nextDisabled() {
-            if ((Math.ceil(vm.endDateIndex / vm.numDaysPerPage)) === vm.numOfPages || vm.datesDisplayed.length === 0) {
-                vm.nextButtonDisabled = true;
-            }
-            else {
-                vm.nextButtonDisabled = false;
-            }
-        }
-
-        function nextPage() {
-            vm.startDateIndex += vm.numDaysPerPage;
-            setDatesDisplayed();
-        }
-
-        function prevDisabled() {
-            if (vm.startDateIndex === 0 || vm.datesDisplayed.length === 0) {
-                vm.prevButtonDisabled = true;
-            }
-            else {
-                vm.prevButtonDisabled = false;
-            }
-        }
-
-        function prevPage() {
-            vm.startDateIndex -= vm.numDaysPerPage;
-            setDatesDisplayed();
-        }
-
-        function removeDate(date) {
-            sleepTrackerService.removeDate(date)
-            .then(function () {
-                getSleepForDay();
-            });
-        }
-
         function save() {
-            var model = angular.copy(vm.model);
-            sleepTrackerService.save(model)
+            var sleepDataObject = angular.copy(vm.sleepDataObject);
+            sleepDataObject.IsActive = true;
+            sleepTrackerService.save(sleepDataObject)
             .then(function () {
                 getSleepForDay();
+                vm.submitted = false;
+                vm.editing = false;
+                vm.sleepDataObject = [];
             });
         }
 
         function setDateRange() {
-            if (!vm.dateRangeStart || !vm.dateRangeEnd) {
-                vm.filteredArray = angular.copy(vm.sleepInfoArr);
+            if (vm.dateRangeStart && vm.dateRangeEnd) {
+                vm.filteredArray = vm.sleepInfoArr.filter(function (x) {
+                    return moment(x.sleepDate).isSameOrAfter(vm.dateRangeStart) && moment(x.sleepDate).isSameOrBefore(vm.dateRangeEnd);
+                });
             }
-            else if (vm.dateRangeStart && vm.dateRangeEnd) {
-                vm.filteredArray = [];
-                for (var i = 0; i < vm.sleepInfoArr.length; i++) {
-                    if (moment(vm.sleepInfoArr[i].sleepDate).isSameOrAfter(vm.dateRangeStart) && moment(vm.sleepInfoArr[i].sleepDate).isSameOrBefore(vm.dateRangeEnd)) {
-                        vm.filteredArray.push(vm.sleepInfoArr[i]);
-                    }
-                }
+            else if (vm.dateRangeStart && !vm.dateRangeEnd) {
+                vm.filteredArray = vm.sleepInfoArr.filter(function (x) {
+                    return moment(x.sleepDate).isSameOrAfter(vm.dateRangeStart);
+                });
+            }
+            else if (!vm.dateRangeStart && vm.dateRangeEnd) {
+                vm.filteredArray = vm.sleepInfoArr.filter(function (x) {
+                    return moment(x.sleepDate).isSameOrBefore(vm.dateRangeEnd);
+                });
             }
             else {
-                return;
+                vm.filteredArray = angular.copy(vm.sleepInfoArr);
             }
             setDatesDisplayed();
         }
@@ -141,14 +145,11 @@
             vm.endDateIndex = vm.startDateIndex + vm.numDaysPerPage;
             vm.datesDisplayed = vm.datesDisplayed.slice(vm.startDateIndex, vm.endDateIndex);
             if (vm.datesDisplayed.length === 0 && vm.startDateIndex != 0) {
-                prevPage();
+                decreasePage();
             }
-            nextDisabled();
-            prevDisabled();
+            disableNextButton();
+            disablePreviousButton();
         }
 
-        function today() {
-            vm.model.sleepDate = new Date();
-        }
     }
 })();

@@ -4,31 +4,28 @@
     angular.module('app').factory('sleepTrackerService', Service);
 
     function Service($http) {
-        var model = {
-            date: new Date()
-        };
 
         var service = {
+            deleteDataForDate: deleteDataForDate,
             getSleepForDay: getSleepForDay,
-            removeDate: removeDate,
             save: save
         };
 
         return service;
+
+        function deleteDataForDate(date) {
+            return $http({
+                method: 'POST',
+                url: 'api/sleeptracker/DeleteDataForDate',
+                data: JSON.stringify(date)
+            })
+        }
 
         function getSleepForDay() {
             return $http({
                 method: 'POST',
                 url: 'api/sleeptracker/GetSleepForDay'
             });
-        }
-
-        function removeDate(date) {
-            return $http({
-                method: 'POST',
-                url: 'api/sleeptracker/RemoveDate',
-                data: JSON.stringify(date)
-            })
         }
 
         function save(model) {

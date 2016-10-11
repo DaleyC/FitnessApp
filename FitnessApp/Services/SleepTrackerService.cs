@@ -11,19 +11,20 @@ namespace FitnessApp.Services
 
         public List<SleepTracker> GetSleepForDay()
         {
-            var model = _context.SleepTracker.ToList();
+            var model = _context.SleepTracker.Where(x => x.IsActive).ToList();
             return model;
         }
 
         public void SaveSleepForDay(SleepTracker model)
         {
-            var existing = _context.SleepTracker.SingleOrDefault(x => x.SleepDate == model.SleepDate);
+            var existing = _context.SleepTracker.SingleOrDefault(x => x.SleepDate == model.SleepDate.Date);
             if (existing == null)
             {
                 _context.SleepTracker.Add(model);
             }
             else
             {
+                existing.IsActive = true;
                 existing.Hours = model.Hours;
                 existing.TimesWokeUp = model.TimesWokeUp;
                 existing.Rating = model.Rating;
@@ -32,12 +33,12 @@ namespace FitnessApp.Services
             _context.SaveChanges();
         }
 
-        public void RemoveDate(DateTime date)
+        public void DeleteDataForDate(DateTime date)
         {
             var existing = _context.SleepTracker.SingleOrDefault(x => x.SleepDate == date.Date);
             if (existing != null)
             {
-                _context.Remove(existing);
+                existing.IsActive = false;
             }
 
             _context.SaveChanges();

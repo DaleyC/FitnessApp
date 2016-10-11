@@ -12,5 +12,6 @@ namespace FitnessApp.Data
         public string TimesWokeUp { get; set; }
         public string Rating { get; set; }
         public string Notes { get; set; }
+        public bool IsActive { get; set; }
     }
 }
