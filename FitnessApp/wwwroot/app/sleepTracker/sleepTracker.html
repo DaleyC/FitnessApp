@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2"><span class="item-req">*</span> Date</label>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="date" class="form-control" ng-model="sleepTracker.sleepDataObject.sleepDate" ng-disabled="sleepTracker.editing" ng-change="sleepTracker.checkDateExists()" />
+                    <input type="date" class="form-control" ng-model="sleepTracker.sleepDataObject.sleepDate" ng-disabled="sleepTracker.editing" ng-change="sleepTracker.checkDateExists()" required/>
                     <input type="hidden" name="dateExists" ng-required="sleepTracker.dateExists && !sleepTracker.editing" ng-model="alwaysEmpty" />
                     <div ng-show="sleepTracker.sleepTrackerForm.dateExists.$invalid && sleepTracker.submitted"><small class="text-red">* This Date has already been saved</small></div>
                 </div>
