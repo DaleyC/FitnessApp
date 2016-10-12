@@ -40,6 +40,7 @@
                 vm.model.meals[vm.index] = angular.copy(vm.meal);
             }
             else {
+                vm.meal.IsActive = true;
                 vm.model.meals.push(angular.copy(vm.meal));
             }
             totalCalories();

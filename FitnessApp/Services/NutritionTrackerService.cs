@@ -31,9 +31,8 @@ namespace FitnessApp.Services
                 var updatingPks = model.Meals.Select(x => x.MealId).ToList();
                 existing.Meals.Where(x => !updatingPks.Contains(x.MealId))
                   .ToList()
-                  .ForEach(item => _context.NutritionTracker_Meals.Remove(item));
+                  .ForEach(item => item.IsActive = false);
 
-                //update remaining
                 existing.Meals.ToList().ForEach(item =>
                 {
                     if (!updatingPks.Contains(item.MealId))
@@ -48,7 +47,6 @@ namespace FitnessApp.Services
                     item.Protein = meal.Protein;
                 });
 
-                //insert new
                 model.Meals.ToList().ForEach(item =>
                 {
                     if (item.MealId != 0)

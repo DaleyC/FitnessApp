@@ -15,6 +15,7 @@ namespace FitnessApp.Data.Models
         public int Fat { get; set; }
         public int Carbs { get; set; }
         public int Protein { get; set; }
+        public bool IsActive { get; set; }
         [Column(TypeName = "Date")]
         public DateTime NutritionDate { get; set; }
 
