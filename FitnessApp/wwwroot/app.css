@@ -104,17 +104,22 @@
     margin-top: 15px;
 }
 
+.removeBorder {
+    border: 0px !important;
+}
+
+.select2-container {
+    padding: 0;
+}
+
+    .select2-container .select2-choice {
+        height: 100%;
+    }
+
 .text-red {
     color: red;
 }
 
 .z-index-1 {
     z-index: 1;
-}
-
-.select2-container{
-    padding: 0;
-}
-.select2-container .select2-choice{
-    height: 100%;
 }
