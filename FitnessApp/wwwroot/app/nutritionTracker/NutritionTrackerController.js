@@ -31,9 +31,9 @@
             setUpWatches();
         }
 
-        function addMeal(nutritionTrackerForm) {
-            if (vm.nutritionTrackerForm.$invalid) {
-                vm.submitted = true;
+        function addMeal() {
+            if (vm.mealsForm.$invalid || vm.nutritionTrackerForm.date.$invalid) {
+                vm.mealSubmitted = true;
                 return;
             }
             else if (vm.editing) {
@@ -46,7 +46,7 @@
             totalCalories();
             vm.meal = {};
             vm.editing = false;
-            vm.submitted = false;
+            vm.mealSubmitted = false;
             vm.foodSelection = null;
         }
 
@@ -95,6 +95,9 @@
         }
 
         function save() {
+            if (vm.nutritionTrackerForm.date.$invalid) {
+                return;
+            }
             var model = angular.copy(vm.model);
             NutritionTrackerService.save(model)
             .then(function () {
@@ -116,6 +119,9 @@
                     return vm.model.nutritionDate;
                 },
                 function (newValue, oldValue) {
+                    if (vm.nutritionTrackerForm.date.$invalid) {
+                        return;
+                    }
                     getNutritionForDay(newValue);
                 });
         }
