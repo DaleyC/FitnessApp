@@ -20,9 +20,9 @@
             },
             function (newValue, oldValue) {
                 if (scope.ngModel) {
-                    return element.siblings().addClass("removeBorder");
+                    return element.siblings().addClass('removeBorder');
                 }
-                element.siblings().removeClass("removeBorder");
+                element.siblings().removeClass('removeBorder');
             });
         }
     }

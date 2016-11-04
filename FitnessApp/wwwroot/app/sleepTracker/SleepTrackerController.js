@@ -38,7 +38,7 @@
 
         function checkDateExists() {
             vm.dateExists = vm.sleepInfoArr.some(function (element) {
-                return (vm.sleepDataObject.sleepDate && moment(element.sleepDate).format("MM-DD-YYYY") === moment(vm.sleepDataObject.sleepDate).format("MM-DD-YYYY"));
+                return (vm.sleepDataObject.sleepDate && moment(element.sleepDate).format('MM-DD-YYYY') === moment(vm.sleepDataObject.sleepDate).format('MM-DD-YYYY'));
             });
             return false;
         }
@@ -144,7 +144,7 @@
             vm.numOfPages = Math.ceil(vm.filteredArray.length / vm.numDaysPerPage);
             vm.endDateIndex = vm.startDateIndex + vm.numDaysPerPage;
             vm.datesDisplayed = vm.datesDisplayed.slice(vm.startDateIndex, vm.endDateIndex);
-            if (vm.datesDisplayed.length === 0 && vm.startDateIndex != 0) {
+            if (vm.datesDisplayed.length === 0 && vm.startDateIndex !== 0) {
                 decreasePage();
             }
             disableNextButton();

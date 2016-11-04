@@ -18,7 +18,7 @@
                 method: 'POST',
                 url: 'api/sleeptracker/DeleteDataForDate',
                 data: JSON.stringify(date)
-            })
+            });
         }
 
         function getSleepForDay() {
