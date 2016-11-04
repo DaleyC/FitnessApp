@@ -3,7 +3,7 @@
 
     angular.module('app').factory('NutritionTrackerService', Service);
 
-    function Service($http) {
+    function Service($http, $log) {
         var model = {
             date: new Date()
         };
@@ -43,14 +43,14 @@
                                     $log.warn(data);
                                 });
                 }
-            }
+            };
         }
 
         function getFoodData(foodId) {
             return $http({
                 method: 'GET',
                 url: 'http://api.nal.usda.gov/ndb/reports/?type=b&format=json&api_key=ctLmQeWtt1VxRCibpTXGrRO5talnsxCoYZglN6he&ndbno=' + foodId
-            })
+            });
         }
 
         function getNutritionForDay(selectedDate) {

@@ -14,6 +14,7 @@ namespace FitnessApp
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseWebRoot("client")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();

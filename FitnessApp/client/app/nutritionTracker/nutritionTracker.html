@@ -135,3 +135,15 @@
         </fieldset>
     </form>
 </div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <p>Attention!</p>
+    </div>
+    <div class="modal-body">
+        <p>You have unsaved data. Are you sure you want to leave?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.ok()">Leave</button>
+        <button class="btn btn-default" ng-click="vm.cancel()">Stay</button>
+    </div>
+</script>
