@@ -3,7 +3,7 @@
 
     angular.module('app').controller('NutritionTrackerController', NutritionTrackerController);
 
-    function NutritionTrackerController(NutritionTrackerService, $scope, $timeout) {
+    function NutritionTrackerController(NutritionTrackerService, $scope, $timeout, $uibModal, $window) {
         var vm = this;
         vm.addMeal = addMeal;
         vm.editItem = editItem;
@@ -30,6 +30,15 @@
             });
             setUpWatches();
         }
+
+        $scope.$on('$locationChangeStart', function (event, next, current) {
+            if (vm.nutritionTrackerForm.$pristine && vm.mealsForm.$pristine) {
+                return;
+            }
+            event.preventDefault();
+            open(next);
+            vm.opened = true;
+        });
 
         function addMeal() {
             if (vm.mealsForm.$invalid || vm.nutritionTrackerForm.date.$invalid) {
@@ -90,6 +99,35 @@
             return vm.getPromise;
         }
 
+        function open(nextRoute) {
+            if (vm.opened) {
+                return;
+            }
+            var modalInstance = $uibModal.open({
+                animation: true,
+                controllerAs: 'vm',
+                templateUrl: 'myModalContent.html',
+                size: 'sm',
+                controller: function ($uibModalInstance) {
+                    var vm = this;
+                    vm.leave = function () {
+                        $uibModalInstance.close();
+                    };
+                    vm.stay = function () {
+                        $uibModalInstance.dismiss();
+                    };
+                },
+            });
+            modalInstance.result.then(function () {
+                vm.nutritionTrackerForm.$setPristine();
+                vm.mealsForm.$setPristine();
+                vm.opened = false;
+                $window.location.href = (nextRoute);
+            }, function () {
+                vm.opened = false;
+            });
+        }
+
         function removeItem(index) {
             vm.model.meals.splice(index, 1);
         }
@@ -101,6 +139,8 @@
             var model = angular.copy(vm.model);
             NutritionTrackerService.save(model)
             .then(function () {
+                vm.nutritionTrackerForm.$setPristine();
+                vm.mealsForm.$setPristine();
             });
         }
 
