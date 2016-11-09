@@ -31,6 +31,13 @@
             setUpWatches();
         }
 
+        angular.element($window).on('beforeunload', function (event) {
+            if (vm.nutritionTrackerForm.$pristine && vm.mealsForm.$pristine) {
+                return;
+            }
+            return 'Are you sure you want to leave? You may lose unsaved data.';
+        })
+
         $scope.$on('$locationChangeStart', function (event, next, current) {
             if (vm.nutritionTrackerForm.$pristine && vm.mealsForm.$pristine) {
                 return;
@@ -71,10 +78,18 @@
         function getFoodData(foodId) {
             vm.getPromise = NutritionTrackerService.getFoodData(foodId)
                 .then(function (data) {
-                    vm.meal.calories = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Energy'; }).value));
-                    vm.meal.fat = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Total lipid (fat)'; }).value));
-                    vm.meal.carbs = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Carbohydrate, by difference'; }).value));
-                    vm.meal.protein = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) { return food.name === 'Protein'; }).value));
+                    vm.meal.calories = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) {
+                        return food.name === 'Energy';
+                    }).value));
+                    vm.meal.fat = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) {
+                        return food.name === 'Total lipid (fat)';
+                    }).value));
+                    vm.meal.carbs = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) {
+                        return food.name === 'Carbohydrate, by difference';
+                    }).value));
+                    vm.meal.protein = Math.round(parseFloat(data.data.report.food.nutrients.find(function (food) {
+                        return food.name === 'Protein';
+                    }).value));
                 });
             return vm.getPromise;
         }
@@ -146,9 +161,9 @@
 
         function setUpWatches() {
             $scope.$watch(
-                function () {
-                    return vm.model.water;
-                },
+        function () {
+            return vm.model.water;
+        },
                 function (newValue, oldValue) {
                     vm.totalWater = vm.model.water * 8;
                     vm.remainingWater = 64 - vm.totalWater;
