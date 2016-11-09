@@ -43,8 +43,8 @@
                 return;
             }
             event.preventDefault();
-            open(next);
-            vm.opened = true;
+            openModal(next);
+            vm.modalIsOpened = true;
         });
 
         function addMeal() {
@@ -114,8 +114,8 @@
             return vm.getPromise;
         }
 
-        function open(nextRoute) {
-            if (vm.opened) {
+        function openModal(newValue, oldValue) {
+            if (vm.modalIsOpened) {
                 return;
             }
             var modalInstance = $uibModal.open({
@@ -136,10 +136,16 @@
             modalInstance.result.then(function () {
                 vm.nutritionTrackerForm.$setPristine();
                 vm.mealsForm.$setPristine();
-                vm.opened = false;
-                $window.location.href = (nextRoute);
+                vm.modalIsOpened = false;
+                if (vm.changeDate) {
+                    vm.changeDate = false;
+                    getNutritionForDay(newValue);
+                } else { $window.location.href = (newValue); }
             }, function () {
-                vm.opened = false;
+                vm.modalIsOpened = false;
+                if (vm.changeDate) {
+                    vm.model.nutritionDate = oldValue;
+                }
             });
         }
 
@@ -176,6 +182,13 @@
                 function (newValue, oldValue) {
                     if (vm.nutritionTrackerForm.date.$invalid) {
                         return;
+                    }
+                    if (vm.changeDate) {
+                        return vm.changeDate = false;
+                    }
+                    if (vm.nutritionTrackerForm.water.$dirty || vm.mealsForm.$dirty) {
+                        vm.changeDate = true;
+                        return openModal(newValue, oldValue);
                     }
                     getNutritionForDay(newValue);
                 });
