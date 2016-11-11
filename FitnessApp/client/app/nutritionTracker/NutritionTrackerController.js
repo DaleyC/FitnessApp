@@ -3,7 +3,7 @@
 
     angular.module('app').controller('NutritionTrackerController', NutritionTrackerController);
 
-    function NutritionTrackerController(NutritionTrackerService, $scope, $timeout, $uibModal, $window) {
+    function NutritionTrackerController(NutritionTrackerService, $scope, $timeout, $uibModal, $window, $state) {
         var vm = this;
         vm.addMeal = addMeal;
         vm.editItem = editItem;
@@ -36,14 +36,18 @@
                 return;
             }
             return 'Are you sure you want to leave? You may lose unsaved data.';
-        })
+        });
 
-        $scope.$on('$locationChangeStart', function (event, next, current) {
+        $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             if (vm.nutritionTrackerForm.$pristine && vm.mealsForm.$pristine) {
                 return;
             }
+            if (vm.allowStateChange) {
+                vm.allowStateChange = false;
+                return;
+            }
             event.preventDefault();
-            openModal(next);
+            openModal(toState);
             vm.modalIsOpened = true;
         });
 
@@ -131,21 +135,28 @@
                     vm.stay = function () {
                         $uibModalInstance.dismiss();
                     };
-                },
+                }
             });
-            modalInstance.result.then(function () {
-                vm.nutritionTrackerForm.$setPristine();
-                vm.mealsForm.$setPristine();
-                vm.modalIsOpened = false;
-                if (vm.changeDate) {
-                    vm.changeDate = false;
-                    getNutritionForDay(newValue);
-                } else { $window.location.href = (newValue); }
-            }, function () {
-                vm.modalIsOpened = false;
-                if (vm.changeDate) {
+            modalInstance.result
+              .then(function () {
+                  vm.nutritionTrackerForm.$setPristine();
+                  vm.mealsForm.$setPristine();
+                  if (vm.allowDateChange) {
+                      vm.allowDateChange = false;
+                      return getNutritionForDay(newValue);
+                  }
+                  else {
+                      vm.allowStateChange = true;
+                      $state.go(newValue);
+                  }
+              })
+            .catch(function () {
+                if (vm.allowDateChange) {
                     vm.model.nutritionDate = oldValue;
                 }
+            })
+            .finally(function () {
+                vm.modalIsOpened = false;
             });
         }
 
@@ -167,9 +178,9 @@
 
         function setUpWatches() {
             $scope.$watch(
-        function () {
-            return vm.model.water;
-        },
+                function () {
+                    return vm.model.water;
+                },
                 function (newValue, oldValue) {
                     vm.totalWater = vm.model.water * 8;
                     vm.remainingWater = 64 - vm.totalWater;
@@ -183,11 +194,11 @@
                     if (vm.nutritionTrackerForm.date.$invalid) {
                         return;
                     }
-                    if (vm.changeDate) {
-                        return vm.changeDate = false;
+                    if (vm.allowDateChange) {
+                        return vm.allowDateChange = false;
                     }
                     if (vm.nutritionTrackerForm.water.$dirty || vm.mealsForm.$dirty) {
-                        vm.changeDate = true;
+                        vm.allowDateChange = true;
                         return openModal(newValue, oldValue);
                     }
                     getNutritionForDay(newValue);
